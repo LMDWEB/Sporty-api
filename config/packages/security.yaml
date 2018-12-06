@@ -28,7 +28,7 @@ security:
             anonymous: true
 
         api:
-            pattern:  ^/api
+            pattern:  ^/api/.*\S.*
             stateless: true
             anonymous: false
             provider: entity_provider
@@ -36,7 +36,20 @@ security:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
 
+        main:
+            anonymous: true
+
+            provider: entity_provider
+            form_login:
+                login_path: account_login
+                check_path: account_login
+
+            logout:
+                path: account_logout
+                target: account_login
+
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api$, roles: ROLE_USER }
+        - { path: ^/api/$, roles: ROLE_USER }

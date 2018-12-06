@@ -2,6 +2,7 @@
 ###> symfony/framework-bundle ###
 /.env
 /.idea
+.DS_Store
 /.env.local
 /.env.*.local
 /public/bundles/
@@ -14,5 +15,5 @@
 ###< symfony/web-server-bundle ###
 
 ###> lexik/jwt-authentication-bundle ###
-/config/jwt/*.pem
+/config/jwt/
 ###< lexik/jwt-authentication-bundle ###
