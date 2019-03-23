@@ -9,12 +9,14 @@
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "doctrine/doctrine-migrations-bundle": "^1.3",
         "lexik/jwt-authentication-bundle": "^2.6",
+        "nelmio/cors-bundle": "^1.5",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
         "symfony/maker-bundle": "^1.9",
-        "symfony/yaml": "4.2.*"
+        "symfony/yaml": "4.2.*",
+        "webonyx/graphql-php": "^0.13.1"
     },
     "config": {
         "preferred-install": {
