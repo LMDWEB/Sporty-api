@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ApiResource(
- *     attributes={"access_control"="is_granted('ROLE_USER')"}
+ *     attributes={"access_control"="is_granted('ROLE_ADMIN')", "access_control_message"="Only admins can get players."}
  * )
  * @ORM\Entity(repositoryClass="App\Repository\PlayerRepository")
  */

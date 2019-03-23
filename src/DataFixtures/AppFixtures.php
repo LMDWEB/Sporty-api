@@ -4,10 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Club;
 use App\Entity\Player;
+use App\Entity\Role;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use PhpParser\Node\Expr\Array_;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
@@ -57,9 +57,19 @@ class AppFixtures extends Fixture
             $manager->persist($player);
         }
 
+        $adminRole = new Role();
+        $adminRole->setTitle("ROLE_ADMIN");
+        $manager->persist($adminRole);
+
         $user = new User("admin");
         $user->setPassword($this->encoder->encodePassword($user, "password"));
+        $user->addUserRole($adminRole);
         $manager->persist($user);
+
+        $user2 = new User("random");
+        $user2->setPassword($this->encoder->encodePassword($user, "password"));
+        $manager->persist($user2);
+
         $manager->flush();
     }
 }
