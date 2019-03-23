@@ -7,6 +7,7 @@ use App\Entity\Player;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use PhpParser\Node\Expr\Array_;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
@@ -18,33 +19,43 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $club = new Club();
-        $club->setName("Lyon");
+        $joueurs = json_decode(file_get_contents("https://raw.githubusercontent.com/LMDWEB/Sporty/master/public/json/playerL1.json"));
 
-        $manager->persist($club);
+        $clubs = array();
+        $realClubs = [];
 
-        $player = new Player();
+        foreach ($joueurs as $joueur){
+            $clubs[$joueur->{'Current club'}] = $joueur->{'Current club'};
+        }
 
-        $player->setFullName("Memphis Depay")
-                ->setPosition("attack")
-                ->setHeight(1.80)
+        foreach($clubs as $club){
+            $team = new Club();
+            $team->setName($club);
+            $manager->persist($team);
+            $realClubs[$team->getName()] = $team;
+        }
+
+        foreach ($joueurs as $joueur) {
+            $foot = (isset($joueur->Foot)) ? $joueur->Foot : "right";
+            $club = $realClubs[$joueur->{'Current club'}];
+            if(!isset($joueur->Height)) {$height = 0;} else {$height = $joueur->Height;}
+            $height = str_replace(',', '.', $height);
+            $height = str_replace('m', '', $height);
+            $height = str_replace(' ', '', $height);
+            $height = floatval($height);
+
+            $player = new Player();
+
+            $player->setFullName($joueur->Name)
+                ->setPosition($joueur->Position)
+                ->setHeight($height)
                 ->setBirthdayDate(time())
-                ->setAge(25)
-                ->setFoot("right")
+                ->setAge($joueur->Age)
+                ->setFoot($foot)
                 ->setClub($club);
 
-        $player2 = new Player();
-
-        $player2->setFullName("Nabil Fekir")
-            ->setPosition("attack")
-            ->setHeight(1.75)
-            ->setBirthdayDate(time())
-            ->setAge(23)
-            ->setFoot("left")
-            ->setClub($club);
-
-        $manager->persist($player);
-        $manager->persist($player2);
+            $manager->persist($player);
+        }
 
         $user = new User("admin");
         $user->setPassword($this->encoder->encodePassword($user, "password"));
