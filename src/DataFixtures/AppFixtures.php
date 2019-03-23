@@ -33,7 +33,18 @@ class AppFixtures extends Fixture
                 ->setFoot("right")
                 ->setClub($club);
 
+        $player2 = new Player();
+
+        $player2->setFullName("Nabil Fekir")
+            ->setPosition("attack")
+            ->setHeight(1.75)
+            ->setBirthdayDate(time())
+            ->setAge(23)
+            ->setFoot("left")
+            ->setClub($club);
+
         $manager->persist($player);
+        $manager->persist($player2);
 
         $user = new User("admin");
         $user->setPassword($this->encoder->encodePassword($user, "password"));
