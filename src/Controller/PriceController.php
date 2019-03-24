@@ -138,7 +138,7 @@ class PriceController extends AbstractController
             var_dump(json_decode($e->getData()));
         }
 
-        return $this->render('price/index.html.twig', [
+        return $this->render('price/confirm.html.twig', [
             'payment' => $payment,
         ]);
     }
