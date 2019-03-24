@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sporty | {% block title %}{% endblock %}</title>
+    <title>Sporty {% block title %}{% endblock %}</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/app.css">
@@ -19,7 +19,7 @@
     <h5 class="my-0 mr-md-auto font-weight-normal">Sporty</h5>
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="{{ path('home') }}">Home</a>
-        <a class="p-2 text-dark" href="{{ path('api') }}">API</a>
+        <a class="p-2 text-dark" href="{{ path('api') }}">API Documentation</a>
         <a class="p-2 text-dark" href="{{ path('token') }}">Token</a>
         <a class="p-2 text-dark" href="{{ path('price') }}">Pricing</a>
     </nav>

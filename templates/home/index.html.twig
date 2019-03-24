@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}| Home{% endblock %}
 
 {% block body %}
 
@@ -18,14 +18,17 @@
                 <h4 class="my-0 font-weight-normal">Free</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
+                <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ month</small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li>10 users included</li>
-                    <li>2 GB of storage</li>
-                    <li>Email support</li>
-                    <li>Help center access</li>
+                    <li>Countries</li>
+                    <li>Seasons</li>
+                    <li>Leagues</li>
+                    <li>Standings</li>
+                    <li>Teams</li>
+                    <li>Livescore</li>
+
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
+                <a href="{{ path('price') }}" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</a>
             </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -33,14 +36,16 @@
                 <h4 class="my-0 font-weight-normal">Pro</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
+                <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ month</small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li>20 users included</li>
-                    <li>10 GB of storage</li>
-                    <li>Priority email support</li>
-                    <li>Help center access</li>
+                    <li>Countries</li>
+                    <li>Seasons</li>
+                    <li>Leagues</li>
+                    <li>Standings</li>
+                    <li>Teams</li>
+                    <li>Livescore</li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
+                <a href="{{ path('price') }}" class="btn btn-lg btn-block btn-primary">Subscribe</a>
             </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -48,14 +53,16 @@
                 <h4 class="my-0 font-weight-normal">Enterprise</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
+                <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ month</small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li>30 users included</li>
-                    <li>15 GB of storage</li>
-                    <li>Phone and email support</li>
-                    <li>Help center access</li>
+                    <li>Countries</li>
+                    <li>Seasons</li>
+                    <li>Leagues</li>
+                    <li>Standings</li>
+                    <li>Teams</li>
+                    <li>Livescore</li>
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-primary">Contact us</button>
+                <a href="{{ path('price') }}" class="btn btn-lg btn-block btn-primary">Subscribe</a>
             </div>
         </div>
     </div>
