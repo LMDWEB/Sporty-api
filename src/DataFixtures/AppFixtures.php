@@ -62,16 +62,8 @@ class AppFixtures extends Fixture
         $manager->persist($adminRole);
 
         $freeRole = new Role();
-        $freeRole->setTitle("ROLE_FREE");
+        $freeRole->setTitle("ROLE_API");
         $manager->persist($freeRole);
-
-        $proRole = new Role();
-        $proRole->setTitle("ROLE_PRO");
-        $manager->persist($proRole);
-
-        $entrepriseRole = new Role();
-        $entrepriseRole->setTitle("ROLE_ENTREPRISE");
-        $entrepriseRole->persist($entrepriseRole);
 
         $user = new User("admin");
         $user->setPassword($this->encoder->encodePassword($user, "password"));

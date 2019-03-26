@@ -25,27 +25,26 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PriceController extends AbstractController
 {
-
     private  $forfaits = [
             1 => [
                 'price' => 0,
                 'name' => 'Free',
-                'description' => 'Free Plan',
-                'role' => 'ROLE_FREE'
+                'requests' => 100,
+                'description' => '100 requêtes',
             ],
 
             2 => [
                 'price' => 15,
                 'name' => 'Pro',
-                'description' => 'Pro Plan',
-                'role' => 'ROLE_PRO'
+                'requests' => 1000,
+                'description' => '1000 requêtes',
             ],
 
             3 => [
                 'price' => 29,
                 'name' => 'Entreprise',
-                'description' => 'Entreprise Plan',
-                'role' => 'ROLE_ENTREPRISE'
+                'requests' => 1000,
+                'description' => '10000 requêtes',
             ],
         ];
     /**
@@ -59,67 +58,92 @@ class PriceController extends AbstractController
     /**
      * @Route("/payment/{id}", name="payment", )
      */
-    public function payment($id) {
+    public function payment($id , RoleRepository $repository, ObjectManager $manager) {
 
         // Check if id forfait is valid
 
         if (in_array($id, array_keys($this->forfaits))) {
 
-            $dotenv = new Dotenv();
-            $dotenv->load('./../.env');
+            // Free subscription
 
-            $apiContext = new ApiContext(
-                new OAuthTokenCredential(
-                    getenv('PAYPAL_ID'),
-                    getenv('PAYPAL_SECRET')
-                )
-            );
+            if ($id == 1) {
 
-            $apiContext->setConfig(array('mode' => ( getenv('PAYPAL_MODE') )));
+                // Add Role to User
 
-            $list = new ItemList();
-            $item = (new Item())
-                ->setName($this->forfaits[$id]['name'])
-                ->setPrice($this->forfaits[$id]['price'])
-                ->setDescription($this->forfaits[$id]['description'])
-                ->setCurrency('EUR')
-                ->setQuantity(1);
-            $list->addItem($item);
+                $role = $repository->findOneBy(array('title' => 'ROLE_API'));
+                $user = $this->getUser();
+                $user->addUserRole($role);
 
-            $details = (new Details())
-                ->setSubtotal($this->forfaits[$id]['price']);
+                $user->setNbRequestMax($this->forfaits[1]['requests']);
 
-            $amount = (new Amount())
-                ->setTotal($this->forfaits[$id]['price'])
-                ->setCurrency('EUR')
-                ->setDetails($details);
+                $manager->persist($user);
+                $manager->flush();
 
-            $transaction = (new Transaction())
-                ->setItemList($list)
-                ->setDescription("Acces API Sporty  : " . $this->forfaits[$id]['name'] )
-                ->setAmount($amount)
-                ->setCustom($id);
+                $this->addFlash('success' , 'Vous etes maintenant souscrit au forfait : ' . $this->forfaits[1]['name']);
 
-            $payment = new Payment();
-            $payment->setTransactions([$transaction]);
-            $payment->setIntent('sale');
-            $redirectUrls = (new RedirectUrls())
-                ->setReturnUrl($this->generateUrl('pay', array(), UrlGeneratorInterface::ABSOLUTE_URL ))
-                ->setCancelUrl($this->generateUrl('cancel', array(), UrlGeneratorInterface::ABSOLUTE_URL ));
-            $payment->setRedirectUrls($redirectUrls);
-            $payment->setPayer((new Payer())->setPaymentMethod('paypal'));
-
-            try {
-                $payment->create($apiContext);
-                header('Location: ' . $payment->getApprovalLink());
-                exit();
-            } catch (PayPalConnectionException $e){
-
-                // log the error
-                //var_dump(json_decode($e->getData()));
-
-                $this->addFlash('danger' , 'Oups, une erreur s\'est produite. Merci de réessayer plus tard.');
                 return $this->render('price/index.html.twig');
+            }
+
+            // Pro et entreprise
+
+            else {
+
+                $dotenv = new Dotenv();
+                $dotenv->load('./../.env');
+
+                $apiContext = new ApiContext(
+                    new OAuthTokenCredential(
+                        getenv('PAYPAL_ID'),
+                        getenv('PAYPAL_SECRET')
+                    )
+                );
+
+                $apiContext->setConfig(array('mode' => ( getenv('PAYPAL_MODE') )));
+
+                $list = new ItemList();
+                $item = (new Item())
+                    ->setName('Forfait ' . $this->forfaits[$id]['name'] . ' Sporty API')
+                    ->setPrice($this->forfaits[$id]['price'])
+                    ->setDescription($this->forfaits[$id]['description'] . ' avec l\'API Sporty')
+                    ->setCurrency('EUR')
+                    ->setQuantity(1);
+                $list->addItem($item);
+
+                $details = (new Details())
+                    ->setSubtotal($this->forfaits[$id]['price']);
+
+                $amount = (new Amount())
+                    ->setTotal($this->forfaits[$id]['price'])
+                    ->setCurrency('EUR')
+                    ->setDetails($details);
+
+                $transaction = (new Transaction())
+                    ->setItemList($list)
+                    ->setDescription("Acces API Sporty  : " . $this->forfaits[$id]['name'] )
+                    ->setAmount($amount)
+                    ->setCustom($id);
+
+                $payment = new Payment();
+                $payment->setTransactions([$transaction]);
+                $payment->setIntent('sale');
+                $redirectUrls = (new RedirectUrls())
+                    ->setReturnUrl($this->generateUrl('pay', array(), UrlGeneratorInterface::ABSOLUTE_URL ))
+                    ->setCancelUrl($this->generateUrl('cancel', array(), UrlGeneratorInterface::ABSOLUTE_URL ));
+                $payment->setRedirectUrls($redirectUrls);
+                $payment->setPayer((new Payer())->setPaymentMethod('paypal'));
+
+                try {
+                    $payment->create($apiContext);
+                    header('Location: ' . $payment->getApprovalLink());
+                    exit();
+                } catch (PayPalConnectionException $e){
+
+                    // log the error
+                    //var_dump(json_decode($e->getData()));
+
+                    $this->addFlash('danger' , 'Oups, une erreur s\'est produite. Merci de réessayer plus tard.');
+                    return $this->render('price/index.html.twig');
+                }
             }
         }
 
@@ -167,11 +191,13 @@ class PriceController extends AbstractController
             return $this->render('price/index.html.twig');
         }
 
-        // Add Role to User
+        // Add Role to User and nb request
 
-        $role = $repository->findOneBy(array('title' => $this->forfaits[$id]['role']));
+        $role = $repository->findOneBy(array('title' => 'ROLE_API'));
         $user = $this->getUser();
         $user->addUserRole($role);
+
+        $user->setNbRequestMax($this->forfaits[$id]['requests']);
 
         $manager->persist($user);
         $manager->flush();

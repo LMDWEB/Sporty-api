@@ -39,6 +39,16 @@ class User implements UserInterface
      */
     private $userRoles;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nb_requests;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $nb_request_max;
+
     public function __construct($username)
     {
         $this->isActive = true;
@@ -107,5 +117,29 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function getNbRequests(): ?int
+    {
+        return $this->nb_requests;
+    }
+
+    public function setNbRequests(int $nb_requests): self
+    {
+        $this->nb_requests = $nb_requests;
+
+        return $this;
+    }
+
+    public function getNbRequestMax(): ?int
+    {
+        return $this->nb_request_max;
+    }
+
+    public function setNbRequestMax(int $nb_request_max): self
+    {
+        $this->nb_request_max = $nb_request_max;
+
+        return $this;
     }
 }
