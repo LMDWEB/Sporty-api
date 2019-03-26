@@ -59,6 +59,8 @@ class PriceController extends AbstractController
      */
     public function payment($id) {
 
+        // Check if id forfait is valid
+
         if (in_array($id, array_keys($this->forfaits))) {
 
             $dotenv = new Dotenv();
@@ -92,17 +94,16 @@ class PriceController extends AbstractController
 
             $transaction = (new Transaction())
                 ->setItemList($list)
-                ->setDescription("Acces API Sporty  :" . $this->forfaits[$id]['name'] )
+                ->setDescription("Acces API Sporty  : " . $this->forfaits[$id]['name'] )
                 ->setAmount($amount)
-                ->setCustom('demo-1');
-
+                ->setCustom($id);
 
             $payment = new Payment();
             $payment->setTransactions([$transaction]);
             $payment->setIntent('sale');
             $redirectUrls = (new RedirectUrls())
                 ->setReturnUrl('http://localhost:8000/pay')
-                ->setCancelUrl('http://localhost:8000/');
+                ->setCancelUrl('http://localhost:8000/cancel');
             $payment->setRedirectUrls($redirectUrls);
             $payment->setPayer((new Payer())->setPaymentMethod('paypal'));
 
@@ -111,17 +112,18 @@ class PriceController extends AbstractController
                 header('Location: ' . $payment->getApprovalLink());
                 exit();
             } catch (PayPalConnectionException $e){
-                var_dump(json_decode($e->getData()));
+
+                // log the error
+                //var_dump(json_decode($e->getData()));
+
+                $this->addFlash('danger' , 'Oups, une erreur s\'est produite. Merci de réessayer plus tard.');
+                return $this->render('price/index.html.twig');
             }
-
-            return $this->render('price/index.html.twig', [
-                'controller_name' => 'PriceController',
-            ]);
-
         }
 
         else {
 
+            $this->addFlash('danger' , 'Oups, une erreur s\'est produite .');
             return $this->render('price/index.html.twig');
         }
 
@@ -132,6 +134,7 @@ class PriceController extends AbstractController
      * @Route("/pay", name="pay")
      */
     public function pay(RoleRepository $repository, ObjectManager $manager) {
+
         $dotenv = new Dotenv();
         $dotenv->load('./../.env');
 
@@ -146,6 +149,8 @@ class PriceController extends AbstractController
 
         $payment = Payment::get($_GET['paymentId'], $apiContext);
 
+        $id = $payment->getTransactions()[0]->getCustom();
+
         $execution = (new PaymentExecution())
             ->setPayerId($_GET['PayerID'])
             ->setTransactions($payment->getTransactions());
@@ -154,20 +159,34 @@ class PriceController extends AbstractController
             $payment->execute($execution, $apiContext);
 
         } catch (PayPalConnectionException $e){
-            var_dump(json_decode($e->getData()));
+
+            // log the error
+            //var_dump(json_decode($e->getData()));
+
+            $this->addFlash('danger' , 'Oups, une erreur s\'est produite. Merci de réessayer plus tard.');
+            return $this->render('price/index.html.twig');
         }
 
         // Add Role to User
 
-        $role = $repository->findOneBy(array('title' => 'ROLE_ADMIN'));
+        $role = $repository->findOneBy(array('title' => $this->forfaits[$id]['role']));
         $user = $this->getUser();
         $user->addUserRole($role);
 
         $manager->persist($user);
         $manager->flush();
 
-        return $this->render('price/confirm.html.twig', [
-            'payment' => $payment,
-        ]);
+        $this->addFlash('success' , 'Vous etes maintenant souscrit au forfait : ' . $this->forfaits[$id]['name']);
+
+        return $this->render('price/index.html.twig');
+    }
+
+    /**
+     * @Route("/cancel", name="cancel")
+     */
+    public function cancel () {
+
+        $this->addFlash('info' , 'Votre commande a été annulé');
+        return $this->render('price/index.html.twig');
     }
 }
