@@ -20,6 +20,8 @@ use PhpParser\Node\Expr\Cast\Object_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 
 class PriceController extends AbstractController
 {
@@ -51,7 +53,7 @@ class PriceController extends AbstractController
      */
     public function index()
     {
-        return $this->render('price/index.html.twig', []);
+        return $this->render('price/index.html.twig');
     }
 
     /**
@@ -102,8 +104,8 @@ class PriceController extends AbstractController
             $payment->setTransactions([$transaction]);
             $payment->setIntent('sale');
             $redirectUrls = (new RedirectUrls())
-                ->setReturnUrl('http://localhost:8000/pay')
-                ->setCancelUrl('http://localhost:8000/cancel');
+                ->setReturnUrl($this->generateUrl('pay', array(), UrlGeneratorInterface::ABSOLUTE_URL ))
+                ->setCancelUrl($this->generateUrl('cancel', array(), UrlGeneratorInterface::ABSOLUTE_URL ));
             $payment->setRedirectUrls($redirectUrls);
             $payment->setPayer((new Payer())->setPaymentMethod('paypal'));
 
@@ -126,8 +128,6 @@ class PriceController extends AbstractController
             $this->addFlash('danger' , 'Oups, une erreur s\'est produite .');
             return $this->render('price/index.html.twig');
         }
-
-
     }
 
     /**
