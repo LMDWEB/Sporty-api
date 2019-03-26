@@ -12,53 +12,56 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Free for 0$</th>
-                <th>Pro for 15$</th>
-                <th>Enterprise for 29$</th>
+                <th class="text-center">Free</th>
+                <th class="text-center">Pro pour 15 euros</th>
+                <th class="text-center">Enterprise pour 29 euros</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Countries</td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
+                <td>Clubs</td>
+                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
             </tr>
             <tr>
-                <td>Seasons</td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
+                <td>Joueurs</td>
+                <td class="text-center text-danger"><i class="fas fa-2x fa-times"></i></td>
+                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
             </tr>
             <tr>
-                <td>Leagues</td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
+                <td>Matchs</td>
+                <td class="text-center text-danger"><i class="fas fa-2x fa-times"></i></td>
+                <td class="text-center text-danger"><i class="fas fa-2x fa-times"></i></td>
+                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
             </tr>
             <tr>
-                <td>Standings</td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
+                <td>Championnats</td>
+                <td class="text-center text-danger"><i class="fas fa-2x fa-times"></i></td>
+                <td class="text-center text-danger"><i class="fas fa-2x fa-times"></i></td>
+                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
             </tr>
             <tr>
-                <td>Teams</td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
-            </tr>
-            <tr>
-                <td>Livescore</td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
-                <td><button class="btn btn-success">Yes</button></td>
-            </tr>
-            <tr>
-                <td>#</td>
-                <td><button class="btn btn-info">Subscribe</button></td>
-                <td><a href="{{ path('payment') }}" class="btn btn-primary">Subscribe</a></td>
-                <td><a href="{{ path('payment') }}" class="btn btn-primary">Subscribe</a></td>
+                <td></td>
+                <td class="text-center">
+                    <a href="{{ path('payment' , {'id' : 1}) }}" class="btn btn-primary">
+                        <i class="fas fa-check"></i>
+                        Souscrire
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="{{ path('payment', {'id' : 2}) }}" class="btn btn-success">
+                        <i class="fas fa-check"></i>
+                        Souscrire
+                    </a>
+                </td>
+                <td class="text-center">
+                    <a href="{{ path('payment' , {'id' : 3}) }}" class="btn btn-success">
+                        <i class="fas fa-check"></i>
+                        Souscrire
+                    </a>
+                </td>
             </tr>
 
         </tbody>

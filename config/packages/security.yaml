@@ -53,3 +53,5 @@ security:
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api$, roles: ROLE_USER }
         - { path: ^/api/$, roles: ROLE_USER }
+        - { path: ^/payment/, roles: ROLE_USER }
+        - { path: ^/pay/, roles: ROLE_USER }
