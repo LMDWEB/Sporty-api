@@ -68,10 +68,14 @@ class AppFixtures extends Fixture
         $user = new User("admin");
         $user->setPassword($this->encoder->encodePassword($user, "password"));
         $user->addUserRole($adminRole);
+        $user->setNbRequests(0);
+        $user->setNbRequestMax(999);
         $manager->persist($user);
 
         $user2 = new User("random");
         $user2->setPassword($this->encoder->encodePassword($user, "password"));
+        $user2->setNbRequests(0);
+        $user2->setNbRequestMax(100);
         $manager->persist($user2);
 
         $manager->flush();
