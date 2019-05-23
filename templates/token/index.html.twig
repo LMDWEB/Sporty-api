@@ -6,6 +6,8 @@
 
     <div class="container">
         <h1>Get your JWT TOKEN</h1>
+        <input type="text" id="url" style="display: none;" value="{{ url }}">
+        <p>When you have your token, you can explore the API Documentation <a href="{{ path('swagger_ui') }}">here</a></p>
         <form id="myForm">
             <label for="">Username: </label><input type="text" id="username" class="form-control" name="username"/><br>
             <label for="">Password: </label><input type="password" id="password" class="form-control" name="password" /><br>
@@ -25,11 +27,12 @@
 
 {% block javascripts %}
     <script>
+        var url = $('#url').val();
         $('#valider').click(function(){
             var settings = {
                 "async": true,
                 "crossDomain": true,
-                "url": "http://localhost:8000/login_check",
+                "url": url+"/login_check",
                 "method": "POST",
                 "headers": {
                     "content-type": "application/json"

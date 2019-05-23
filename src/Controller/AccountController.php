@@ -30,4 +30,11 @@ class AccountController extends AbstractController
     public function logout(){
 
     }
+
+    /**
+     * @Route("/account", name="my_account")
+     */
+    public function my_account(){
+        return $this->render('account/account.html.twig');
+    }
 }

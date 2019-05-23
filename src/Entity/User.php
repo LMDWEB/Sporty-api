@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="users")
@@ -40,6 +41,11 @@ class User implements UserInterface
     private $userRoles;
 
     /**
+     * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas correctement confirmer votre mot de passe")
+     */
+    public $passwordConfirm;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $nb_requests;
@@ -49,16 +55,21 @@ class User implements UserInterface
      */
     private $nb_request_max;
 
-    public function __construct($username)
+    public function __construct()
     {
         $this->isActive = true;
         $this->userRoles = new ArrayCollection();
-        $this->username = $username;
     }
 
     public function getUsername()
     {
         return $this->username;
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        return $this;
     }
 
     public function getSalt()

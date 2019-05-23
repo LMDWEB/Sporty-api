@@ -26,7 +26,7 @@ class Team
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=40)
+     * @ORM\Column(type="string", length=40, nullable=true)
      */
     private $code;
 
@@ -99,12 +99,12 @@ class Team
         return $this;
     }
 
-    public function getCode(): ?string
+    public function getCode()
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(string $code)
     {
         $this->code = $code;
 

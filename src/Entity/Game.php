@@ -43,6 +43,11 @@ class Game
      */
     private $league;
 
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $score;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,18 @@ class Game
     public function setLeague(?League $league): self
     {
         $this->league = $league;
+
+        return $this;
+    }
+
+    public function getScore(): ?string
+    {
+        return $this->score;
+    }
+
+    public function setScore(?string $score): self
+    {
+        $this->score = $score;
 
         return $this;
     }
