@@ -113,7 +113,7 @@ class User implements UserInterface
     /**
      * @return Collection|Role[]
      */
-    public function getUserRoles(): Collection
+    public function getUserRoles()
     {
         return $this->userRoles;
     }
