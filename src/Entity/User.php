@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * @ORM\Table(name="users")
  * @ORM\Entity
@@ -25,6 +27,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=25, unique=true)
+     * @Groups("game")
      */
     private $username;
 

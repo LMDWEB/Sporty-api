@@ -30,6 +30,8 @@ class AppFixtures extends Fixture
         $contentTeamsPremierLeague = file_get_contents(__DIR__.'/../../public/TeamPremierLeague.json');
         $contentTeamsPremierLeague = json_decode($contentTeamsPremierLeague);
 
+        $teamsBundesliga = json_decode(file_get_contents(__DIR__.'/../../public/TeamBundesliga.json'));
+
         $contentPlayers = file_get_contents(__DIR__.'/../../public/PsgPlayers.json');
         $contentPlayers = json_decode($contentPlayers);
 
@@ -105,10 +107,21 @@ class AppFixtures extends Fixture
                 ->setLeague($leagues[2]);
             $manager->persist($teamData);
 
-            if ($teamData->getCode() == "PSG"){
-                $psgTeam = $teamData;
-            }
-            $teams[$team->team_id] = $teamData;
+        }
+
+        foreach ($teamsBundesliga->api->teams as $team){
+            $teamData = new Team();
+            if ($team->code == null) $team->code = "";
+            $teamData->setName($team->name)
+                ->setCode($team->code)
+                ->setLogo($team->logo)
+                ->setCountry($team->country)
+                ->setFounded($team->founded)
+                ->setVenueName($team->venue_name)
+                ->setVenueCapacity($team->venue_capacity)
+                ->setLeague($leagues[8]);
+            $manager->persist($teamData);
+
         }
 
         /*
@@ -135,39 +148,12 @@ class AppFixtures extends Fixture
                 ->setEventTimestamp($match->event_timestamp)
                 ->setAwayTeam($teams[$match->awayTeam_id])
                 ->setHomeTeam($teams[$match->homeTeam_id])
+                ->setGoalsAwayTeam($match->goalsAwayTeam)
+                ->setGoalsHomeTeam($match->goalsHomeTeam)
                 ->setScore($match->final_score);
 
             $manager->persist($game);
         }
-
-        /*
-         * ROLE
-         */
-        $adminRole = new Role();
-        $adminRole->setTitle("ROLE_ADMIN");
-        $manager->persist($adminRole);
-
-        $freeRole = new Role();
-        $freeRole->setTitle("ROLE_API");
-        $manager->persist($freeRole);
-
-        /*
-         * USER
-         */
-        $user = new User();
-        $user->setUsername("admin");
-        $user->setPassword($this->encoder->encodePassword($user, "password"));
-        $user->addUserRole($adminRole);
-        $user->setNbRequests(0);
-        $user->setNbRequestMax(999);
-        $manager->persist($user);
-
-        $user2 = new User();
-        $user2->setUsername("random");
-        $user2->setPassword($this->encoder->encodePassword($user, "password"));
-        $user2->setNbRequests(0);
-        $user2->setNbRequestMax(100);
-        $manager->persist($user2);
 
         $manager->flush();
     }

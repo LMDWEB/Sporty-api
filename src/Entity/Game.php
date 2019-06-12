@@ -6,10 +6,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
- * @ApiResource()
+ * @ApiResource(normalizationContext={"groups"={"game"}})
  */
 class Game
 {
@@ -17,43 +18,63 @@ class Game
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"game"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"game"})
      */
     private $event_timestamp;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"game"})
      */
     private $status;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="games")
+     * @Groups({"game"})
      */
     private $homeTeam;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="awayGames")
+     * @Groups({"game"})
      */
     private $awayTeam;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\League", inversedBy="games")
+     * @Groups({"game"})
      */
     private $league;
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
+     * @Groups({"game"})
      */
     private $score;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="game")
+     * @Groups({"game"})
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"game"})
+     */
+    private $goalsHomeTeam;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"game"})
+     */
+    private $goalsAwayTeam;
 
     public function __construct()
     {
@@ -164,6 +185,30 @@ class Game
                 $comment->setGame(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGoalsHomeTeam(): ?int
+    {
+        return $this->goalsHomeTeam;
+    }
+
+    public function setGoalsHomeTeam(?int $goalsHomeTeam): self
+    {
+        $this->goalsHomeTeam = $goalsHomeTeam;
+
+        return $this;
+    }
+
+    public function getGoalsAwayTeam(): ?int
+    {
+        return $this->goalsAwayTeam;
+    }
+
+    public function setGoalsAwayTeam(?int $goalsAwayTeam): self
+    {
+        $this->goalsAwayTeam = $goalsAwayTeam;
 
         return $this;
     }
