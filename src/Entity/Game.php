@@ -140,7 +140,7 @@ class Game
     /**
      * @return Collection|Comment[]
      */
-    public function getComments()
+    public function getComments(): Collection
     {
         return $this->comments;
     }
