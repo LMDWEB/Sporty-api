@@ -5,63 +5,83 @@
 {% block body %}
 
 
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Pricing</h1>
-    <p class="lead">Welcome to the Sporty API, you must create an account to use the API</p>
-</div>
-
-<div class="container">
-    <div class="card-deck mb-3 text-center">
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Free</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">0€ <small class="text-muted">/ month</small></h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li> <strong>100 requests</strong></li>
-                    <li>Leagues</li>
-                    <li>Teams</li>
-                    <li>Players</li>
-                    <li>Games</li>
-                    <li>Livescores</li>
-
-                </ul>
-                <a href="{{ path('price') }}" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</a>
+<div class="pricing container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row-title">Pricing</div>
+                <div class="row-subtitle"> <p>Welcome to the Sporty API, you must create an account to use the API</p></div>
             </div>
         </div>
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Pro</h4>
+        <div class="row custom-padding">
+            <div class="col-sm-6 col-md-4">
+                <div class="pricing-box">
+                    <div class="pricing-title">Free</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>Leagues</li>
+                            <li>Teams</li>
+                            <li>Players</li>
+                            <li>Games</li>
+                            <li>Livescores</li>
+                            <li> <strong>100 requests</strong></li>
+                        </ul>
+                    </div>
+                    <div class="pricing-price">
+                        <div class="price">
+                            <span class="currency">Free</span>
+                        </div>
+                    </div>
+                    <div class="pricing-button">
+                        <a href="{{ path('price') }}">Sign up for free</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">10€ <small class="text-muted">/ month</small></h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li> <strong>1000 requests</strong></li>
-                    <li>Leagues</li>
-                    <li>Teams</li>
-                    <li>Players</li>
-                    <li>Games</li>
-                    <li>Livescores</li>
-                </ul>
-                <a href="{{ path('price') }}" class="btn btn-lg btn-block btn-primary">Subscribe</a>
+            <div class="col-sm-6 col-md-4">
+                <div class="pricing-box">
+                    <div class="pricing-title">Pro</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>Leagues</li>
+                            <li>Teams</li>
+                            <li>Players</li>
+                            <li>Games</li>
+                            <li>Livescores</li>
+                            <li> <strong>1000 requests</strong></li>
+                        </ul>
+                    </div>
+                    <div class="pricing-price">
+                        <div class="price">
+                            <span class="currency">€</span><span class="num">10</span><span class="duration">/mo</span>
+                        </div>
+                    </div>
+                    <div class="pricing-button">
+                        <a href="{{ path('price') }}">Subscribe</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Enterprise</h4>
-            </div>
-            <div class="card-body">
-                <h1 class="card-title pricing-card-title">20€ <small class="text-muted">/ month</small></h1>
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li> <strong>Unlimited !</strong></li>
-                    <li>Leagues</li>
-                    <li>Teams</li>
-                    <li>Players</li>
-                    <li>Games</li>
-                    <li>Livescores</li>
-                </ul>
-                <a href="{{ path('price') }}" class="btn btn-lg btn-block btn-primary">Subscribe</a>
+            <div class="col-sm-6 col-md-4">
+                <div class="pricing-box">
+                    <div class="pricing-title">Enterprise</div>
+                    <div class="pricing-details">
+                        <ul>
+                            <li>Leagues</li>
+                            <li>Teams</li>
+                            <li>Players</li>
+                            <li>Games</li>
+                            <li>Livescores</li>
+                            <li> <strong>Unlimited !</strong></li>
+                        </ul>
+                    </div>
+                    <div class="pricing-price">
+                        <div class="price">
+                            <span class="currency">€</span><span class="num">20</span><span class="duration">/mo</span>
+                        </div>
+                    </div>
+                    <div class="pricing-button">
+                        <a href="{{ path('price') }}">Subscribe</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

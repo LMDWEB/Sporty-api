@@ -8,13 +8,20 @@
 
     <title>Sporty {% block title %}{% endblock %}</title>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('template/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('template/css/fontawesome-all.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('template/css/slick.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('template/css/style.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/app.css">
+
+    
+    <script src="{{ asset('template/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('template/js/slick.min.js') }}"></script>
+    <script src="{{ asset('template/js/main.js') }}"></script>
+
 
 </head>
 
@@ -49,15 +56,22 @@
                                 </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right other-navbar">
+                            {% if app.user %}
                                 <li class="nav-item">
-                                            {% if app.user %}
-                                                <a class="btn btn-outline-primary mr-2" href="{{ path('my_account') }}">{{ app.user.username }}</a>
-                                                <a class="btn btn-outline-danger" href="{{ path('account_logout') }}">Log out</a>
-                                            {% else %}
-                                                <a class="btn btn-outline-primary mr-2" href="{{ path('account_login') }}">Sign in</a>
-                                                <a class="btn btn-outline-primary" href="{{ path('account_register') }}">Register</a>
-                                            {% endif %}
-                                </li>
+                                    <a class="btn btn-outline-primary mr-2" href="{{ path('my_account') }}">{{ app.user.username }}</a>
+                                    <a class="btn btn-outline-danger" href="{{ path('account_logout') }}">Log out</a>
+                                </li>                    
+                            {% else %}
+                               <div class="login-div">
+                                    <li class="nav-item login-display">
+                                        <a class="nav-link" href="{{ path('account_login') }}">Login</a>
+                                    </li>
+                                    <li class="nav-item register-display">
+                                        <a class="nav-link" href="{{ path('account_register') }}">Register</a>
+                                    </li>
+                                </div>
+                            {% endif %}
+                                
                             </ul>
                         </div>
                     </div>
@@ -78,9 +92,9 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-7">
-                                    <div class="b-text">Outstanding Web<br>Hosting for you.</div>
-                                    <div class="m-text">Starting at only <span class="bold">$2.38/mo*</span></div>
-                                    <a href="#" class="hbtn hbtn-primary hbtn-lg">Hosting Services</a>
+                                    <div class="b-text">Sporty une API<br>faite pour vous !</div>
+                                    <div class="m-text">Commencer par voir <span class="bold">nos offres</span></div>
+                                    <a href="{{ path('price') }}" class="hbtn hbtn-primary hbtn-lg">Offres</a>
                                 </div>
                             </div>
                         </div>
@@ -105,37 +119,62 @@
 
 {% block body %}{% endblock %}
 
-<div class="container">
-
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-    <div class="row">
-        <div class="col-12 col-md">
-            <img class="mb-2" src="https://i.pinimg.com/originals/e4/67/68/e467686be20a11ada32ca9f37f488d68.png" alt="" width="24" height="24"> Sporty
-            <small class="d-block mb-3 text-muted">&copy; 2018-2019</small>
+<div class="footer container-fluid">
+    <a class="btn-go-top" href="#"><i class="hstb hstb-down-arrow"></i></a>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-2 col-md-3 col-lg-3">
+                <div class="footer-menu">
+                    <h4>Features</h4>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="{{ path('token') }}">Cool stuff</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-2 col-md-3 col-lg-3">
+                <div class="footer-menu">
+                    <h4>Ressources</h4>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="{{ path('swagger_ui') }}">API Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-2 col-md-3 col-lg-3">
+                <div class="footer-menu">
+                    <h4>About</h4>
+                    <ul class="list-unstyled text-small">
+                        <li><a class="text-muted" href="https://github.com/LMDWEB/Sporty-api">Team <i class="fab fa-github"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div class="footer-menu custom-footer-menu">
+                    <h4>Contact us</h4>
+                    <ul class="social">
+                        <li><a href="https://twitter.com/lmdpsg"><i class="fab fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="col-6 col-md">
-            <h5>Features</h5>
-            <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="{{ path('token') }}">Cool stuff</a></li>
-            </ul>
-        </div>
-        <div class="col-6 col-md">
-            <h5>Resources</h5>
-            <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="{{ path('swagger_ui') }}">API Documentation</a></li>
-            </ul>
-        </div>
-        <div class="col-6 col-md">
-            <h5>About</h5>
-            <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="https://github.com/LMDWEB/Sporty-api">Team</a></li>
-            </ul>
+        <div class="sub-footer">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="sub-footer-menu">
+                        <ul>
+                            <li><a href="#">Sitemap</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="privacy.html">Privacy Policy</a></li>
+                        </ul>        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="copyright">© Copyright 2019 Sporty, All Rights Reserved</div>
+                </div>
+            </div>
         </div>
     </div>
-</footer>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
