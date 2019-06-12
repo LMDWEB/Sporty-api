@@ -47,15 +47,22 @@
                                 </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right other-navbar">
+                            {% if app.user %}
                                 <li class="nav-item">
-                                            {% if app.user %}
-                                                <a class="btn btn-outline-primary mr-2" href="{{ path('my_account') }}">{{ app.user.username }}</a>
-                                                <a class="btn btn-outline-danger" href="{{ path('account_logout') }}">Log out</a>
-                                            {% else %}
-                                                <a class="btn btn-light" href="{{ path('account_login') }}">Sign in</a>
-                                                <a class="btn btn-outline-primary" href="{{ path('account_register') }}">Register</a>
-                                            {% endif %}
-                                </li>
+                                    <a class="btn btn-outline-primary mr-2" href="{{ path('my_account') }}">{{ app.user.username }}</a>
+                                    <a class="btn btn-outline-danger" href="{{ path('account_logout') }}">Log out</a>
+                                </li>                    
+                            {% else %}
+                               <div class="login-div">
+                                    <li class="nav-item login-display">
+                                        <a class="nav-link" href="{{ path('account_login') }}">Login</a>
+                                    </li>
+                                    <li class="nav-item register-display">
+                                        <a class="nav-link" href="{{ path('account_register') }}">Register</a>
+                                    </li>
+                                </div>
+                            {% endif %}
+                                
                             </ul>
                         </div>
                     </div>
@@ -76,9 +83,9 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-7">
-                                    <div class="b-text">Outstanding Web<br>Hosting for you.</div>
-                                    <div class="m-text">Starting at only <span class="bold">$2.38/mo*</span></div>
-                                    <a href="#" class="hbtn hbtn-primary hbtn-lg">Hosting Services</a>
+                                    <div class="b-text">Sporty une API<br>faite pour vous !</div>
+                                    <div class="m-text">Commencer par voir <span class="bold">nos offres</span></div>
+                                    <a href="#" class="hbtn hbtn-primary hbtn-lg">Offres</a>
                                 </div>
                             </div>
                         </div>

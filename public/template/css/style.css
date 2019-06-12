@@ -41,6 +41,22 @@
 $color-blue: #004170;
 $color-red: #DA291C;
 $color-gold: #CEAB5D;*/
+
+.login-div {
+    width: 194px;
+    height: 46px;
+    display: inline-block;
+    padding: 27px;
+}
+
+li.nav-item.login-display {
+    display: inline-block;
+    margin-right: 23px;
+}
+
+li.nav-item.register-display {
+    display: inline-block;
+}
 /* -----------------------------------
     1 - General Styles
 ------------------------------------*/
@@ -634,7 +650,7 @@ body.fullpage {
 }
 
 .navbar-brand img {
-    width: 122px;
+    width: 176px;
 }
 
 nav.navbar .navbar-toggler {
