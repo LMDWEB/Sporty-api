@@ -23,12 +23,6 @@ class Game
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Groups({"game"})
-     */
-    private $event_timestamp;
-
-    /**
      * @ORM\Column(type="string", length=50)
      * @Groups({"game"})
      */
@@ -76,6 +70,18 @@ class Game
      */
     private $goalsAwayTeam;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"game"})
+     */
+    private $eventStart;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"game"})
+     */
+    private $eventBegin;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -84,18 +90,6 @@ class Game
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getEventTimestamp(): ?int
-    {
-        return $this->event_timestamp;
-    }
-
-    public function setEventTimestamp(int $event_timestamp): self
-    {
-        $this->event_timestamp = $event_timestamp;
-
-        return $this;
     }
 
     public function getStatus(): ?string
@@ -209,6 +203,30 @@ class Game
     public function setGoalsAwayTeam(?int $goalsAwayTeam): self
     {
         $this->goalsAwayTeam = $goalsAwayTeam;
+
+        return $this;
+    }
+
+    public function getEventStart(): ?int
+    {
+        return $this->eventStart;
+    }
+
+    public function setEventStart(?int $eventStart): self
+    {
+        $this->eventStart = $eventStart;
+
+        return $this;
+    }
+
+    public function getEventBegin(): ?string
+    {
+        return $this->eventBegin;
+    }
+
+    public function setEventBegin(?string $eventBegin): self
+    {
+        $this->eventBegin = $eventBegin;
 
         return $this;
     }

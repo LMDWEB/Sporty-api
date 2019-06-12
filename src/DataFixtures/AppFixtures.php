@@ -145,7 +145,8 @@ class AppFixtures extends Fixture
             $game = new Game();
             $game->setLeague($leagues[4])
                 ->setStatus($match->status)
-                ->setEventTimestamp($match->event_timestamp)
+                ->setEventStart($match->event_timestamp)
+                ->setEventBegin($match->event_date)
                 ->setAwayTeam($teams[$match->awayTeam_id])
                 ->setHomeTeam($teams[$match->homeTeam_id])
                 ->setGoalsAwayTeam($match->goalsAwayTeam)
