@@ -8,33 +8,87 @@
 
     <title>Sporty {% block title %}{% endblock %}</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('template/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('template/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('template/css/slick.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('template/css/style.css') }}">
 
 </head>
 
 <body>
 
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal">Sporty</h5>
-    <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="{{ path('home') }}">Home</a>
-        <a class="p-2 text-dark" href="{{ path('token') }}">Token</a>
-        <a class="p-2 text-dark" href="{{ path('price') }}">Pricing</a>
-        <a class="btn btn-outline-secondary" href="{{ path('swagger_ui') }}">API Documentation</a>
+<div id="header-holder">
+    <div class="cloud-bg"></div>
+    <nav id="nav" class="navbar navbar-full">
+        <div class="container-fluid">
+            <div class="container container-nav">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navbar-header">
+                            <button aria-expanded="false" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('img/logo.png') }}" alt="Sporty"></a>
+                        </div>
+                        <div style="height: 1px;" role="main" aria-expanded="false" class="navbar-collapse collapse navbar-collapse-centered" id="bs">
+                            <ul class="nav navbar-nav navbar-nav-centered">
+                                <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Home</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('token') }}">Token</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('price') }}">Pricing</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('swagger_ui') }}">API Documentation</a>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right other-navbar">
+                                <li class="nav-item">
+                                            {% if app.user %}
+                                                <a class="btn btn-outline-primary mr-2" href="{{ path('my_account') }}">{{ app.user.username }}</a>
+                                                <a class="btn btn-outline-danger" href="{{ path('account_logout') }}">Log out</a>
+                                            {% else %}
+                                                <a class="btn btn-outline-primary mr-2" href="{{ path('account_login') }}">Sign in</a>
+                                                <a class="btn btn-outline-primary" href="{{ path('account_register') }}">Register</a>
+                                            {% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </nav>
-    {#<a class="btn btn-outline-primary" href="#">Sign up</a>#}
-        {% if app.user %}
-            <a class="btn btn-outline-primary mr-2" href="{{ path('my_account') }}">{{ app.user.username }}</a>
-            <a class="btn btn-outline-danger" href="{{ path('account_logout') }}">Log out</a>
-        {% else %}
-            <a class="btn btn-outline-primary mr-2" href="{{ path('account_login') }}">Sign in</a>
-            <a class="btn btn-outline-primary" href="{{ path('account_register') }}">Register</a>
-        {% endif %}
-
-    </a>
+    <div id="top-content" class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="main-slider">
+                        <div class="slide">
+                            <div class="row rtl-row">
+                                <div class="col-sm-5">
+                                    <div class="img-holder">
+                                        <img src="images/slide-img1.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="b-text">Outstanding Web<br>Hosting for you.</div>
+                                    <div class="m-text">Starting at only <span class="bold">$2.38/mo*</span></div>
+                                    <a href="#" class="hbtn hbtn-primary hbtn-lg">Hosting Services</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% for label,messages in app.flashes %}
@@ -80,10 +134,7 @@
     </div>
 </footer>
 </div>
-
-
-<script src="https://code.jquery.com/jquery-3.1.1.min.js">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 {% block javascripts %}{% endblock %}
 </body>

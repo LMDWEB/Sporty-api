@@ -21,7 +21,7 @@ html {
 }
 
 .card-deck .card:hover {
-    box-shadow: 0 0 0 3px #82a9ff;
+    box-shadow: 0 0 0 3px #CEAB5D;
     transition: all 0.3s ease;
     cursor: pointer;
 }
