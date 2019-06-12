@@ -63,6 +63,8 @@ final class AddOwnerToArticleSubscriber implements EventSubscriberInterface
         // Attach the user to the not yet persisted Article
         $article->setCreator($owner);
 
+        $article->setCreatedAt(new \DateTime());
+
 
 
     }
