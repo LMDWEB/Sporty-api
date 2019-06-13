@@ -35,6 +35,7 @@ class Team
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"game"})
      */
     private $logo;
 
