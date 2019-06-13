@@ -44,6 +44,16 @@ class GameRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findFiveNextGames()
+    {
+        return $this->createQueryBuilder('g')
+            ->select('g')
+            ->orderBy('g.id', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+           ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Game
     {
