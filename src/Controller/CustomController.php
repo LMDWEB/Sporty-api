@@ -2,21 +2,46 @@
 
 namespace App\Controller;
 
+use App\Entity\Game;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class CustomController extends AbstractController
 {
     /**
-     * @Route("/custom", name="custom")
+     * @Route("/api/last_games", name="custom")
      */
     public function index()
     {
         $response = new Response();
-        $response->setContent(json_encode([
-            'data' => 123,
-        ]));
+
+        $games = $this->getDoctrine()->getRepository(Game::class)
+            ->findFiveLastGames();
+
+        //$response->setContent($games);
+
+        $tab = array();
+
+        foreach ($games as $game){
+            $tab[] = array(
+              'id' => $game->getId(),
+              'homeTeam' => $game->getHomeTeam()->getName(),
+              'awayTeam' => $game->getAwayTeam()->getName(),
+              'score' => $game->getScore(),
+              'goalsHomeTeam' => $game->getGoalsHomeTeam(),
+              'goalsAwayTeam' => $game->getGoalsAwayTeam(),
+              'eventStart' => $game->getEventStart(),
+              'eventBegin' => $game->getEventBegin()
+            );
+        }
+
+        //dd($tab);
+        //die();
+
+        $response->setContent(json_encode($tab));
+
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
