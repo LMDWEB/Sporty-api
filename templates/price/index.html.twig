@@ -3,93 +3,100 @@
 {% block title %}| Price{% endblock %}
 
 {% block body %}
+    {% block header %}
+        {{ include('header.html.twig')}}
+    {% endblock %}
 
-<div class="container">
+        <div class="container">
 
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ label }} alert-dismissible fade show text-center" role="alert">
-                <strong>{{ message }}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
-    {% endfor %}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }} alert-dismissible fade show text-center" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endfor %}
 
-    <h1>Pricing</h1>
-    <p class="lead">Our Free Plan is Free Forever. xxxxxx Check out our packages below</p>
+            <h1>Pricing</h1>
+            <p class="lead">Our Free Plan is Free Forever. xxxxxx Check out our packages below</p>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th class="text-center">Free</th>
-                <th class="text-center">Pro for 10€</th>
-                <th class="text-center">Enterprise for 20€</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Number of requests</td>
-                <td class="text-center"><strong>100 requests</strong></td>
-                <td class="text-center"><strong>1000 requests</strong></td>
-                <td class="text-center"><strong>1000 requests</strong></td>
-            </tr>
-            <tr>
-                <td>Leagues</td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-            </tr>
-            <tr>
-                <td>Teams</td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-            </tr>
-            <tr>
-                <td>Players</td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-            </tr>
-            <tr>
-                <td>Games</td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-            </tr>
-            <tr>
-                <td>Livescores</td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="text-center">
-                    <a href="{{ path('payment' , {'id' : 1}) }}" class="btn btn-primary">
-                        <i class="fas fa-check"></i>
-                        Subscribe
-                    </a>
-                </td>
-                <td class="text-center">
-                    <a href="{{ path('payment', {'id' : 2}) }}" class="btn btn-success">
-                        <i class="fas fa-check"></i>
-                        Subscribe
-                    </a>
-                </td>
-                <td class="text-center">
-                    <a href="{{ path('payment' , {'id' : 3}) }}" class="btn btn-success">
-                        <i class="fas fa-check"></i>
-                        Subscribe
-                    </a>
-                </td>
-            </tr>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="text-center">Free</th>
+                        <th class="text-center">Pro for 10€</th>
+                        <th class="text-center">Enterprise for 20€</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Number of requests</td>
+                        <td class="text-center"><strong>100 requests</strong></td>
+                        <td class="text-center"><strong>1000 requests</strong></td>
+                        <td class="text-center"><strong>1000 requests</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Leagues</td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Teams</td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Players</td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Games</td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Livescores</td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="text-center">
+                            <a href="{{ path('payment' , {'id' : 1}) }}" class="btn btn-primary">
+                                <i class="fas fa-check"></i>
+                                Subscribe
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ path('payment', {'id' : 2}) }}" class="btn btn-success">
+                                <i class="fas fa-check"></i>
+                                Subscribe
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ path('payment' , {'id' : 3}) }}" class="btn btn-success">
+                                <i class="fas fa-check"></i>
+                                Subscribe
+                            </a>
+                        </td>
+                    </tr>
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
 
-</div>
+        </div>
+
+    {% block footer %}
+        {{ include('footer.html.twig')}}
+    {% endblock %}
 {% endblock %}

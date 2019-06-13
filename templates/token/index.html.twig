@@ -4,6 +4,10 @@
 
 {% block body %}
 
+    {% block header %}
+        {{ include('header.html.twig')}}
+    {% endblock %}
+
     <div class="container">
         <h1>Get your JWT TOKEN</h1>
         <input type="text" id="url" style="display: none;" value="{{ url }}">
@@ -22,6 +26,10 @@
             </div>
         </div>
     </div>
+
+    {% block footer %}
+        {{ include('footer.html.twig')}}
+    {% endblock %}
 
 {% endblock %}
 

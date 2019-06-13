@@ -3,6 +3,9 @@
 {% block title %}| Login{% endblock %}
 
 {% block body %}
+    {% block header %}
+        {{ include('header.html.twig')}}
+    {% endblock %}
     <div class="container">
         {% if app.user %}
             connecté
@@ -36,6 +39,8 @@
         </div>
 
     </div>
-
+    {% block footer %}
+        {{ include('footer.html.twig')}}
+    {% endblock %}
 
 {% endblock %}
