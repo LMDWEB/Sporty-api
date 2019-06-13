@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
- * @ApiResource(normalizationContext={"groups"={"game"}})
+ * @ApiResource(normalizationContext={"groups"={"game"}}, attributes={"pagination_items_per_page"=3})
  */
 class Game
 {
