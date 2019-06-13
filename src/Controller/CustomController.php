@@ -28,7 +28,9 @@ class CustomController extends AbstractController
             $tab[] = array(
               'id' => $game->getId(),
               'homeTeam' => $game->getHomeTeam()->getName(),
+              'homeTeamLogo' => $game->getHomeTeam()->getLogo(),
               'awayTeam' => $game->getAwayTeam()->getName(),
+              'awayTeamLogo' => $game->getAwayTeam()->getLogo(),
               'score' => $game->getScore(),
               'goalsHomeTeam' => $game->getGoalsHomeTeam(),
               'goalsAwayTeam' => $game->getGoalsAwayTeam(),
