@@ -38,6 +38,8 @@ class AppFixtures extends Fixture
         $contentMatchLigue1 = file_get_contents(__DIR__.'/../../public/MatchLigue1.json');
         $contentMatchLigue1 = json_decode($contentMatchLigue1);
 
+        $contentMatchPremierLeague = json_decode(file_get_contents(__DIR__.'/../../public/MatchPremierLeague.json'));
+
 
         $leagues = array();
 
@@ -72,6 +74,7 @@ class AppFixtures extends Fixture
         $psgTeam = "";
         $teams = array();
 
+
         /*
          * TEAM
          */
@@ -94,6 +97,8 @@ class AppFixtures extends Fixture
             $teams[$team->team_id] = $teamData;
         }
 
+        $teamsAnglais = array();
+
         foreach ($contentTeamsPremierLeague->api->teams as $team){
             $teamData = new Team();
             if ($team->code == null) $team->code = "";
@@ -107,6 +112,7 @@ class AppFixtures extends Fixture
                 ->setLeague($leagues[2]);
             $manager->persist($teamData);
 
+            $teamsAnglais[$team->team_id] = $teamData;
         }
 
         foreach ($teamsBundesliga->api->teams as $team){
@@ -142,6 +148,9 @@ class AppFixtures extends Fixture
          * GAME
          */
         foreach ($contentMatchLigue1->api->fixtures as $match){
+            $num = explode('-', $match->round);
+            $round = intval(trim($num[1]));
+
             $game = new Game();
             $game->setLeague($leagues[4])
                 ->setStatus($match->status)
@@ -151,7 +160,28 @@ class AppFixtures extends Fixture
                 ->setHomeTeam($teams[$match->homeTeam_id])
                 ->setGoalsAwayTeam($match->goalsAwayTeam)
                 ->setGoalsHomeTeam($match->goalsHomeTeam)
+                ->setRound($round)
                 ->setScore($match->final_score);
+
+            $manager->persist($game);
+        }
+
+        foreach ($contentMatchPremierLeague->api->fixtures as $match){
+
+            $num = explode('-', $match->round);
+            $round = intval(trim($num[1]));
+
+            $game = new Game();
+            $game->setLeague($leagues[2])
+                ->setStatus($match->status)
+                ->setEventStart($match->event_timestamp)
+                ->setEventBegin($match->event_date)
+                ->setAwayTeam($teamsAnglais[$match->awayTeam->team_id])
+                ->setHomeTeam($teamsAnglais[$match->homeTeam->team_id])
+                ->setGoalsAwayTeam($match->goalsAwayTeam)
+                ->setGoalsHomeTeam($match->goalsHomeTeam)
+                ->setRound($round)
+                ->setScore($match->score->fulltime);
 
             $manager->persist($game);
         }

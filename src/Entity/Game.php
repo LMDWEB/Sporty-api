@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
- * @ApiResource(normalizationContext={"groups"={"game"}}, attributes={"pagination_items_per_page"=3})
+ * @ApiResource(normalizationContext={"groups"={"game"}})
  */
 class Game
 {
@@ -81,6 +81,12 @@ class Game
      * @Groups({"game"})
      */
     private $eventBegin;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"game"})
+     */
+    private $round;
 
     public function __construct()
     {
@@ -227,6 +233,18 @@ class Game
     public function setEventBegin(?string $eventBegin): self
     {
         $this->eventBegin = $eventBegin;
+
+        return $this;
+    }
+
+    public function getRound(): ?int
+    {
+        return $this->round;
+    }
+
+    public function setRound(?int $round): self
+    {
+        $this->round = $round;
 
         return $this;
     }

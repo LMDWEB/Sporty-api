@@ -4,7 +4,7 @@ api_platform:
     version: '1.0'
     collection:
         pagination:
-            enabled: true
+            enabled: false
     formats:
         json:
             mime_types: ['application/json']
