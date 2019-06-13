@@ -28,15 +28,21 @@ class CustomController extends AbstractController
         foreach ($games as $game){
             $tab[] = array(
               'id' => $game->getId(),
-              'homeTeam' => $game->getHomeTeam()->getName(),
-              'homeTeamLogo' => $game->getHomeTeam()->getLogo(),
-              'awayTeam' => $game->getAwayTeam()->getName(),
-              'awayTeamLogo' => $game->getAwayTeam()->getLogo(),
-              'score' => $game->getScore(),
-              'goalsHomeTeam' => $game->getGoalsHomeTeam(),
-              'goalsAwayTeam' => $game->getGoalsAwayTeam(),
-              'eventStart' => $game->getEventStart(),
-              'eventBegin' => $game->getEventBegin()
+              'status' => $game->getStatus(),
+              'homeTeam' => array(
+                  'id' => $game->getHomeTeam()->getId(),
+                  'name' => $game->getHomeTeam()->getName(),
+                  'logo' => $game->getHomeTeam()->getLogo()
+              ),
+              'awayTeam' => array(
+                  'id' => $game->getAwayTeam()->getId(),
+                  'name' => $game->getAwayTeam()->getName(),
+                  'logo' => $game->getAwayTeam()->getLogo()
+              ),
+              'league' => array(
+                  'id' => $game->getLeague()->getId(),
+                  'name' => $game->getLeague()->getName()
+              )
             );
         }
 
