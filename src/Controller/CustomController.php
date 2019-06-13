@@ -6,6 +6,7 @@ use App\Entity\Game;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 
 class CustomController extends AbstractController
@@ -161,6 +162,26 @@ class CustomController extends AbstractController
         $response->setContent(json_encode($tab));
 
         $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /**
+     * @Route("/api/me", name="me")
+     */
+    public function me(TokenStorageInterface $storage)
+    {
+        $response = new Response();
+        $token = $storage->getToken();
+        $user = $token->getUser();
+        $name = $user->getUsername();
+        $id = $user->getId();
+
+        $response->setContent(json_encode([
+            'id' => $id,
+            'name' => $name
+        ]));
+        $response->headers->set('Content-Type', 'application/json');
+
         return $response;
     }
 }
