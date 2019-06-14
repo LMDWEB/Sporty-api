@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -171,15 +172,17 @@ class Game
     /**
      * @return Collection|Comment[]
      */
-    public function getComments(): Collection
+    public function getComments()
     {
-        $iterator = $this->comments->getIterator();
-        $iterator->uasort(function ($a, $b) {
-            return ($a->getId() > $b->getId()) ? -1 : 1;
-        });
+        $collection = $this->comments;
+        $orderBy = (Criteria::create())->orderBy([
+            'id' => Criteria::DESC,
+        ]);
 
-        $tab = new ArrayCollection(iterator_to_array($iterator));
-        return $tab;
+        // return sorter SomeCollectionItem array
+        return $collection->matching($orderBy)->getValues();
+
+
 
     }
 
