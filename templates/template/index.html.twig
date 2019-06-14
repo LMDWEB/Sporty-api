@@ -95,86 +95,32 @@
         </div>
     </div>
 </div>
-<div class="pricing container-fluid">
-    <div class="container">
+<div class="container">
+        {% if app.user %}
+            connecté
+        {% endif %}
         <div class="row">
-            <div class="col-xs-12">
-                <div class="row-title">Pricing</div>
-                <div class="row-subtitle"> <p>Welcome to the Sporty API, you must create an account to use the API</p></div>
-            </div>
-        </div>
-        <div class="row custom-padding">
-            <div class="col-sm-6 col-md-4">
-                <div class="pricing-box">
-                    <div class="pricing-title">Free</div>
-                    <div class="pricing-details">
-                        <ul>
-                            <li>Leagues</li>
-                            <li>Teams</li>
-                            <li>Players</li>
-                            <li>Games</li>
-                            <li>Livescores</li>
-                            <li> <strong>100 requests</strong></li>
-                        </ul>
-                    </div>
-                    <div class="pricing-price">
-                        <div class="price">
-                            <span class="currency">€</span><span class="num">0</span><span class="duration">/mo</span>
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-6">
+                <div class="bg-light py-3 px-3">
+                    <h1>Login</h1>
+                    <p><a href="{{ path('account_register') }}">Register here</a></p>
+                    <form action="{{ path('account_login') }}" method="post">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" name="_username" id="username" value="{{ username }}" class="form-control" placeholder="Username..." required>
                         </div>
-                    </div>
-                    <div class="pricing-button">
-                        <a href="{{ path('price') }}">Sign up for free</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="pricing-box">
-                    <div class="pricing-title">Pro</div>
-                    <div class="pricing-details">
-                        <ul>
-                            <li>Leagues</li>
-                            <li>Teams</li>
-                            <li>Players</li>
-                            <li>Games</li>
-                            <li>Livescores</li>
-                            <li> <strong>1000 requests</strong></li>
-                        </ul>
-                    </div>
-                    <div class="pricing-price">
-                        <div class="price">
-                            <span class="currency">€</span><span class="num">10</span><span class="duration">/mo</span>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="_password" id="password" placeholder="Password..." class="form-control" required>
                         </div>
-                    </div>
-                    <div class="pricing-button">
-                        <a href="{{ path('price') }}">Subscribe</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="pricing-box">
-                    <div class="pricing-title">Enterprise</div>
-                    <div class="pricing-details">
-                        <ul>
-                            <li>Leagues</li>
-                            <li>Teams</li>
-                            <li>Players</li>
-                            <li>Games</li>
-                            <li>Livescores</li>
-                            <li> <strong>Unlimited !</strong></li>
-                        </ul>
-                    </div>
-                    <div class="pricing-price">
-                        <div class="price">
-                            <span class="currency">€</span><span class="num">20</span><span class="duration">/mo</span>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">Log in</button>
                         </div>
-                    </div>
-                    <div class="pricing-button">
-                        <a href="{{ path('price') }}">Subscribe</a>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 <div class="footer container-fluid">
     <a class="btn-go-top" href="#"><i class="hstb hstb-down-arrow"></i></a>

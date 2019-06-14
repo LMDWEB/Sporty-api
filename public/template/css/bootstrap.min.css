@@ -208,7 +208,7 @@ td,th{
         background-color:#fff!important
     }
     .table-bordered td,.table-bordered th{
-        border:1px solid #ddd!important
+        border:1px solid #004170!important
     }
 }
 @font-face{
@@ -2096,17 +2096,17 @@ th{
     padding:8px;
     line-height:1.42857143;
     vertical-align:top;
-    border-top:1px solid #ddd
+    border-top:1px solid #004170
 }
 .table>thead>tr>th{
     vertical-align:bottom;
-    border-bottom:2px solid #ddd
+    border-bottom:2px solid #004170
 }
 .table>caption+thead>tr:first-child>td,.table>caption+thead>tr:first-child>th,.table>colgroup+thead>tr:first-child>td,.table>colgroup+thead>tr:first-child>th,.table>thead:first-child>tr:first-child>td,.table>thead:first-child>tr:first-child>th{
     border-top:0
 }
 .table>tbody+tbody{
-    border-top:2px solid #ddd
+    border-top:2px solid #004170
 }
 .table .table{
     background-color:#fff
@@ -2115,10 +2115,10 @@ th{
     padding:5px
 }
 .table-bordered{
-    border:1px solid #ddd
+    border:1px solid #004170
 }
 .table-bordered>tbody>tr>td,.table-bordered>tbody>tr>th,.table-bordered>tfoot>tr>td,.table-bordered>tfoot>tr>th,.table-bordered>thead>tr>td,.table-bordered>thead>tr>th{
-    border:1px solid #ddd
+    border:1px solid #004170
 }
 .table-bordered>thead>tr>td,.table-bordered>thead>tr>th{
     border-bottom-width:2px
@@ -2179,7 +2179,7 @@ table td[class*=col-],table th[class*=col-]{
         margin-bottom:15px;
         overflow-y:hidden;
         -ms-overflow-style:-ms-autohiding-scrollbar;
-        border:1px solid #ddd
+        border:1px solid #004170
     }
     .table-responsive>.table{
         margin-bottom:0

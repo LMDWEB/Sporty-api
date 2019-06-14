@@ -35,6 +35,185 @@
 
 @import url("../css/sporty.css");
 
+#taille {
+    font-size: 65px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 64px;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
+}
+
+#offres {
+    min-height: 550px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+#login {
+    min-height: 450px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.bg-dark {
+    background-image: linear-gradient(to left bottom, #ffffff, #eae8f9, #d2d3f3, #b7beee, #99abe9, #829cdd, #6a8dd0, #4f7ec4, #3e6eae, #2c5f99, #195084, #004170);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 18px -6px rgba(0,0,0,0.53);
+}
+
+.p-15 {
+    padding-bottom: 15px;
+}
+
+
+a.button-psg, button.button-psg {
+    background-color: #004170;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    width: 100%;
+    color:white;
+}
+
+.button-psg:hover {
+    background-color: #CEAB5D;
+}
+
+#banner-title {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    position: relative;
+    margin-bottom:50px;
+}
+
+/* -----------------------------------
+    1 - Paralax Styles
+------------------------------------*/
+
+.page-header {
+    min-height: 100vh;
+    max-height: 999px;
+    padding: 0;
+    color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    margin-top:0;
+ }
+ 
+ .page-header>.content {
+    margin-top: 12%;
+    text-align: center;
+    margin-bottom: 50px;
+ }
+ 
+ .page-header.page-header-small {
+    min-height: 60vh;
+    max-height: 440px;
+ }
+ 
+ .page-header:before {
+    background-color: rgba(0, 0, 0, 0.3);
+ }
+ 
+ .page-header>.container {
+    z-index: 2;
+    padding-top: 12vh;
+    padding-bottom: 40px;
+ }
+ 
+ .page-header .page-header-image {
+    position: absolute;
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+ }
+ 
+ .page-header .content-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0 15px;
+    width: 100%;
+    max-width: 880px;
+ }
+ 
+ .page-header footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+ }
+ 
+ .page-header .container {
+    height: 100%;
+    z-index: 1;
+    text-align: center;
+    position: relative;
+ }
+ 
+ .page-header .category,
+ .page-header .description {
+    color: rgba(255, 255, 255, 0.8);
+ }
+ 
+ .page-header:after,
+ .page-header:before {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    content: "";
+ }
+ 
+ .clear-filter:after,
+ .clear-filter:before {
+    display: none;
+ }
+ 
+ .clear-filter[filter-color="orange"] {
+    background: rgba(44, 44, 44, 0.2);
+    /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(to bottom, #ffffffa8, #eeedfabd, #dadcf57a, #c5cbf159, #acbced7d, #96ace173, #809cd4c4, #688dc8b8, #5279b1b5, #3c669bc2, #235385b8, #004170e0);
+    /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(to bottom, #ffffffa8, #eeedfabd, #dadcf57a, #c5cbf159, #acbced7d, #96ace173, #809cd4c4, #688dc8b8, #5279b1b5, #3c669bc2, #235385b8, #004170e0);
+    /* For Opera 11.1 to 12.0 */
+    background: -moz-llinear-gradient(to bottom, #ffffffa8, #eeedfabd, #dadcf57a, #c5cbf159, #acbced7d, #96ace173, #809cd4c4, #688dc8b8, #5279b1b5, #3c669bc2, #235385b8, #004170e0);
+    /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom, #ffffffa8, #eeedfabd, #dadcf57a, #c5cbf159, #acbced7d, #96ace173, #809cd4c4, #688dc8b8, #5279b1b5, #3c669bc2, #235385b8, #004170e0);
+    /* Standard syntax */
+ }
+
 /* -----------------------------------
     1 - Color Styles
 ------------------------------------
@@ -43,22 +222,22 @@ $color-red: #DA291C;
 $color-gold: #CEAB5D;*/
 
 .login-div {
-    width: 194px;
+    min-width: 300px;
     height: 46px;
     display: inline-block;
-    padding: 27px;
+    padding-top: 27px;
 }
 
 li.nav-item.login-display {
     display: inline-block;
-    margin-right: 23px;
+    margin-right: 18px;;
 }
 
 li.nav-item.register-display {
     display: inline-block;
 }
 /* -----------------------------------
-    1 - 404 Styles
+    2 - 404 Styles
 ------------------------------------*/
 
 #notfound {
@@ -649,7 +828,16 @@ body.fullpage {
 #header-holder {
     position: relative;
     /*background-color: #111a2b;*/
-    background: linear-gradient(to top, #004170, #586a92, #9298b5, #cacad9, #ffffff); 
+    background-image: url('/img/fond.jpg'); 
+    background-size: cover;
+    background-position: center center;
+    z-index: 10;
+}
+
+#header-holder ::after{
+    position: relative;
+    /*background-color: #111a2b;*/
+    background: linear-gradient(to bottom, #ffffffa8, #eeedfabd, #dadcf57a, #c5cbf159, #acbced7d, #96ace173, #809cd4c4, #688dc8b8, #5279b1b5, #3c669bc2, #235385b8, #004170e0); 
     z-index: 10;
 }
 
@@ -1238,8 +1426,8 @@ nav.navbar .nav .open > a:hover, nav.navbar .nav .open > a:focus {
 }
 
 .main-slider .slide > .row {
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .main-slider .slide > .row [class^="col-"] {
@@ -1248,10 +1436,10 @@ nav.navbar .nav .open > a:hover, nav.navbar .nav .open > a:focus {
 }
 
 .main-slider .b-text {
-    font-size: 65px;
+    font-size: 38px;
     font-weight: 700;
     color: #ffffff;
-    line-height: 64px;
+    line-height: 12px;
     letter-spacing: 2px;
     margin-bottom: 35px;
 }

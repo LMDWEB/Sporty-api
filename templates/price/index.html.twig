@@ -19,80 +19,82 @@
                     </div>
                 {% endfor %}
             {% endfor %}
+            <div id="offres">
+                <h1>Offres</h1>
+                <p class="lead">Achat disponible Uniquement via Paypal</p>
 
-            <h1>Pricing</h1>
-            <p class="lead">Our Free Plan is Free Forever. xxxxxx Check out our packages below</p>
+                <table class="table table-snipped">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th class="text-center">Gratuit</th>
+                            <th class="text-center">Pro pour 15€/mois</th>
+                            <th class="text-center">Entreprise pour 35€/mois</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nombre de requêtes</td>
+                            <td class="text-center"><strong>100 requêtes</strong></td>
+                            <td class="text-center"><strong>1000 requêtes</strong></td>
+                            <td class="text-center"><strong>Illimités </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Ligues</td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Equipes</td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Joueurs</td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Matchs</td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Score en direct</td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td class="text-center">
+                                <a href="{{ path('payment' , {'id' : 1}) }}" class="button-psg">
+                                    <i class="fas fa-check"></i>
+                                    Souscrire
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ path('payment', {'id' : 2}) }}" class="button-psg">
+                                    <i class="fas fa-check"></i>
+                                    Souscrire
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ path('payment' , {'id' : 3}) }}" class="button-psg">
+                                    <i class="fas fa-check"></i>
+                                    Souscrire
+                                </a>
+                            </td>
+                        </tr>
 
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th class="text-center">Free</th>
-                        <th class="text-center">Pro for 10€</th>
-                        <th class="text-center">Enterprise for 20€</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Number of requests</td>
-                        <td class="text-center"><strong>100 requests</strong></td>
-                        <td class="text-center"><strong>1000 requests</strong></td>
-                        <td class="text-center"><strong>1000 requests</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Leagues</td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Teams</td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Players</td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Games</td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td>Livescores</td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td class="text-center">
-                            <a href="{{ path('payment' , {'id' : 1}) }}" class="btn btn-primary">
-                                <i class="fas fa-check"></i>
-                                Subscribe
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{ path('payment', {'id' : 2}) }}" class="btn btn-success">
-                                <i class="fas fa-check"></i>
-                                Subscribe
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{ path('payment' , {'id' : 3}) }}" class="btn btn-success">
-                                <i class="fas fa-check"></i>
-                                Subscribe
-                            </a>
-                        </td>
-                    </tr>
+                    </tbody>
+                </table>
 
-                </tbody>
-            </table>
+            </div>
 
         </div>
 

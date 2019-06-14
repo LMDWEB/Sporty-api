@@ -1,64 +1,65 @@
 <div id="header-holder">
-    <div class="cloud-bg"></div>
-    <nav id="nav" class="navbar navbar-full">
-        <div class="container-fluid">
-            <div class="container container-nav">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="navbar-header">
-                            <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('img/logo.png') }}" alt="Sporty"></a>
-                        </div>
-                        <div style="height: 1px;" role="main" aria-expanded="false" class="navbar-collapse collapse navbar-collapse-centered" id="bs">
-                            <ul class="nav navbar-nav navbar-nav-centered">
-                                <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Home</a></li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('token') }}">Token</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('price') }}">Pricing</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('swagger_ui') }}">API Documentation</a>
-                                </li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right other-navbar">
-                            {% if app.user %}
-                                <li class="nav-item">
-                                    <a class="btn btn-outline-primary mr-2" href="{{ path('my_account') }}">{{ app.user.username }}</a>
-                                    <a class="btn btn-outline-danger" href="{{ path('account_logout') }}">Log out</a>
-                                </li>                    
-                            {% else %}
-                               <div class="login-div">
+    <section class="page-header clear-filter section-hero section-shaped my-0" filter-color="orange" >
+       <div class="page-header-image" data-parallax="true" style="background-image:url('img/theme/header.jpg');">
+       </div>
+        <nav id="nav" class="navbar navbar-full">
+            <div class="container-fluid">
+                <div class="container container-nav">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('img/logo.png') }}" alt="Sporty"></a>
+                            </div>
+                            <div style="height: 1px;" role="main" aria-expanded="false" class="navbar-collapse collapse navbar-collapse-centered" id="bs">
+                                <ul class="nav navbar-nav navbar-nav-centered">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('price') }}">Offres</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('swagger_ui') }}">API Documentation</a>
+                                    </li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right other-navbar">
+                                {% if app.user %}
+                                <div class="login-div">
                                     <li class="nav-item login-display">
-                                        <a class="nav-link" href="{{ path('account_login') }}">Login</a>
+                                        <a class="nav-link" href="{{ path('my_account') }}">{{ app.user.username }}</a>
                                     </li>
                                     <li class="nav-item register-display">
-                                        <a class="nav-link" href="{{ path('account_register') }}">Register</a>
+                                        <a class="nav-link" href="{{ path('account_logout') }}">Déconnecter</a>
                                     </li>
-                                </div>
-                            {% endif %}
-                                
-                            </ul>
+                                </div>                    
+                                {% else %}
+                                <div class="login-div">
+                                        <li class="nav-item login-display">
+                                            <a class="nav-link" href="{{ path('account_login') }}">Se connecter</a>
+                                        </li>
+                                        <li class="nav-item register-display">
+                                            <a class="nav-link" href="{{ path('account_register') }}">Inscription</a>
+                                        </li>
+                                    </div>
+                                {% endif %}
+                                    
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-    <div id="top-content" class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="main-slider">
-                        <div class="slide">
-                            <div class="row rtl-row">
-                                <div class="col-sm-5">
-                                    <div class="img-holder">
-                                        <img src="images/slide-img1.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-sm-7">
-                                    <div class="b-text">Sporty une API<br>faite pour vous !</div>
+        </nav>
+        <div id="top-content" class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div id="banner-title" class="col-sm-12">
+                        <div class="main-slider">
+                            <div class="slide">
+                                <div id="banner-title" class="col-sm-7">
+                                    <div id="taille">Sporty</div>
+                                    <div class="b-text">
+                                        <br>une API fait pour vous !</div>
                                     <div class="m-text">Commencer par voir <span class="bold">nos offres</span></div>
                                     <a href="{{ path('price') }}" class="hbtn hbtn-primary hbtn-lg">Offres</a>
                                 </div>
@@ -68,5 +69,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
