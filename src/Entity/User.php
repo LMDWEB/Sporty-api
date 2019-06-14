@@ -2,14 +2,18 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Table(name="users")
  * @ORM\Entity
+ * @ApiResource()
  */
 class User implements UserInterface
 {
@@ -17,11 +21,13 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups("game")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=25, unique=true)
+     * @Groups("game")
      */
     private $username;
 
@@ -55,10 +61,27 @@ class User implements UserInterface
      */
     private $nb_request_max;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="creator")
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\GameSuggest", mappedBy="author")
+     */
+    private $gameSuggests;
+
     public function __construct()
     {
         $this->isActive = true;
         $this->userRoles = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->gameSuggests = new ArrayCollection();
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getUsername()
@@ -150,6 +173,68 @@ class User implements UserInterface
     public function setNbRequestMax(int $nb_request_max): self
     {
         $this->nb_request_max = $nb_request_max;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getCreator() === $this) {
+                $comment->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|GameSuggest[]
+     */
+    public function getGameSuggests(): Collection
+    {
+        return $this->gameSuggests;
+    }
+
+    public function addGameSuggest(GameSuggest $gameSuggest): self
+    {
+        if (!$this->gameSuggests->contains($gameSuggest)) {
+            $this->gameSuggests[] = $gameSuggest;
+            $gameSuggest->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGameSuggest(GameSuggest $gameSuggest): self
+    {
+        if ($this->gameSuggests->contains($gameSuggest)) {
+            $this->gameSuggests->removeElement($gameSuggest);
+            // set the owning side to null (unless already changed)
+            if ($gameSuggest->getAuthor() === $this) {
+                $gameSuggest->setAuthor(null);
+            }
+        }
 
         return $this;
     }

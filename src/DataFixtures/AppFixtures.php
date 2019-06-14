@@ -30,11 +30,15 @@ class AppFixtures extends Fixture
         $contentTeamsPremierLeague = file_get_contents(__DIR__.'/../../public/TeamPremierLeague.json');
         $contentTeamsPremierLeague = json_decode($contentTeamsPremierLeague);
 
+        $teamsBundesliga = json_decode(file_get_contents(__DIR__.'/../../public/TeamBundesliga.json'));
+
         $contentPlayers = file_get_contents(__DIR__.'/../../public/PsgPlayers.json');
         $contentPlayers = json_decode($contentPlayers);
 
         $contentMatchLigue1 = file_get_contents(__DIR__.'/../../public/MatchLigue1.json');
         $contentMatchLigue1 = json_decode($contentMatchLigue1);
+
+        $contentMatchPremierLeague = json_decode(file_get_contents(__DIR__.'/../../public/MatchPremierLeague.json'));
 
 
         $leagues = array();
@@ -70,6 +74,7 @@ class AppFixtures extends Fixture
         $psgTeam = "";
         $teams = array();
 
+
         /*
          * TEAM
          */
@@ -92,6 +97,8 @@ class AppFixtures extends Fixture
             $teams[$team->team_id] = $teamData;
         }
 
+        $teamsAnglais = array();
+
         foreach ($contentTeamsPremierLeague->api->teams as $team){
             $teamData = new Team();
             if ($team->code == null) $team->code = "";
@@ -105,10 +112,22 @@ class AppFixtures extends Fixture
                 ->setLeague($leagues[2]);
             $manager->persist($teamData);
 
-            if ($teamData->getCode() == "PSG"){
-                $psgTeam = $teamData;
-            }
-            $teams[$team->team_id] = $teamData;
+            $teamsAnglais[$team->team_id] = $teamData;
+        }
+
+        foreach ($teamsBundesliga->api->teams as $team){
+            $teamData = new Team();
+            if ($team->code == null) $team->code = "";
+            $teamData->setName($team->name)
+                ->setCode($team->code)
+                ->setLogo($team->logo)
+                ->setCountry($team->country)
+                ->setFounded($team->founded)
+                ->setVenueName($team->venue_name)
+                ->setVenueCapacity($team->venue_capacity)
+                ->setLeague($leagues[8]);
+            $manager->persist($teamData);
+
         }
 
         /*
@@ -129,45 +148,44 @@ class AppFixtures extends Fixture
          * GAME
          */
         foreach ($contentMatchLigue1->api->fixtures as $match){
+
+            $num = explode('-', $match->round);
+            $round = intval(trim($num[1]));
+
             $game = new Game();
             $game->setLeague($leagues[4])
                 ->setStatus($match->status)
-                ->setEventTimestamp($match->event_timestamp)
+                ->setEventStart($match->event_timestamp)
+                ->setEventBegin($match->event_date)
                 ->setAwayTeam($teams[$match->awayTeam_id])
                 ->setHomeTeam($teams[$match->homeTeam_id])
+                ->setGoalsAwayTeam($match->goalsAwayTeam)
+                ->setGoalsHomeTeam($match->goalsHomeTeam)
+                ->setRound($round)
                 ->setScore($match->final_score);
 
             $manager->persist($game);
         }
 
-        /*
-         * ROLE
-         */
-        $adminRole = new Role();
-        $adminRole->setTitle("ROLE_ADMIN");
-        $manager->persist($adminRole);
+        foreach ($contentMatchPremierLeague->api->fixtures as $match){
 
-        $freeRole = new Role();
-        $freeRole->setTitle("ROLE_API");
-        $manager->persist($freeRole);
+            $num = explode('-', $match->round);
+            $round = intval(trim($num[1]));
 
-        /*
-         * USER
-         */
-        $user = new User();
-        $user->setUsername("admin");
-        $user->setPassword($this->encoder->encodePassword($user, "password"));
-        $user->addUserRole($adminRole);
-        $user->setNbRequests(0);
-        $user->setNbRequestMax(999);
-        $manager->persist($user);
+            $game = new Game();
+            $game->setLeague($leagues[2])
+                ->setStatus($match->status)
+                ->setEventStart($match->event_timestamp)
+                ->setEventBegin($match->event_date)
+                ->setAwayTeam($teamsAnglais[$match->awayTeam->team_id])
+                ->setHomeTeam($teamsAnglais[$match->homeTeam->team_id])
+                ->setGoalsAwayTeam($match->goalsAwayTeam)
+                ->setGoalsHomeTeam($match->goalsHomeTeam)
+                ->setRound($round)
+                ->setScore($match->score->fulltime);
 
-        $user2 = new User();
-        $user2->setUsername("random");
-        $user2->setPassword($this->encoder->encodePassword($user, "password"));
-        $user2->setNbRequests(0);
-        $user2->setNbRequestMax(100);
-        $manager->persist($user2);
+            $manager->persist($game);
+        }
 
         $manager->flush();
     }

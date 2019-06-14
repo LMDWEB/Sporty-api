@@ -14,7 +14,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/registration", name="account_register")
+     * @Route("/registration_old", name="account_register")
      * @param Request $request
      * @param ObjectManager $manager
      * @param UserPasswordEncoderInterface $encoder
