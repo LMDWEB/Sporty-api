@@ -13,7 +13,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
- * @ApiResource(normalizationContext={"groups"={"game"}}, attributes={"order"={"comment.id": "DESC"}})
+ * @ApiResource(normalizationContext={"groups"={"game"}})
  * @ApiFilter(OrderFilter::class)
  * @ApiFilter(SearchFilter::class, properties={"round": "exact"})
  */
