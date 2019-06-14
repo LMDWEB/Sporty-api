@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Game;
+use App\Repository\GameSuggestRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -184,4 +185,30 @@ class CustomController extends AbstractController
 
         return $response;
     }
+
+    /**
+     * @Route("/api/suggest/{id}", name="suggest")
+     * @param $id
+     * @param GameSuggestRepository $gameSuggestRepository
+     * @return Response
+     */
+    public function scoreSuggest($id, GameSuggestRepository $gameSuggestRepository)
+    {
+        $response = new Response();
+       // $game = $gameSuggestRepository->find($id);
+       // dd($game);
+        $response->setContent(json_encode(array(
+            'id' => $id,
+            'game' => '/api/games/'.$id,
+            'accuracy' => 85.6,
+            'scoreHomeTeam' => 2,
+            'scoreAwayTeam' => 1,
+            'contributors' => 12
+
+        )));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
 }
