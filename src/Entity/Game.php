@@ -9,9 +9,11 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
- * @ApiResource(normalizationContext={"groups"={"game"}})
+ * @ApiResource(normalizationContext={"groups"={"game"}}, attributes={"order"={"comment.id": "DESC"}})
+ * @ApiFilter(OrderFilter::class)
  * @ApiFilter(SearchFilter::class, properties={"round": "exact"})
  */
 class Game
@@ -171,7 +173,14 @@ class Game
      */
     public function getComments(): Collection
     {
-        return $this->comments;
+        $iterator = $this->comments->getIterator();
+        $iterator->uasort(function ($a, $b) {
+            return ($a->getId() > $b->getId()) ? -1 : 1;
+        });
+
+        $tab = new ArrayCollection(iterator_to_array($iterator));
+        return $tab;
+
     }
 
     public function addComment(Comment $comment): self
