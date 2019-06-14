@@ -148,6 +148,7 @@ class AppFixtures extends Fixture
          * GAME
          */
         foreach ($contentMatchLigue1->api->fixtures as $match){
+
             $num = explode('-', $match->round);
             $round = intval(trim($num[1]));
 

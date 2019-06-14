@@ -66,11 +66,17 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\GameSuggest", mappedBy="author")
+     */
+    private $gameSuggests;
+
     public function __construct()
     {
         $this->isActive = true;
         $this->userRoles = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->gameSuggests = new ArrayCollection();
     }
 
     public function getId()
@@ -196,6 +202,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getCreator() === $this) {
                 $comment->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|GameSuggest[]
+     */
+    public function getGameSuggests(): Collection
+    {
+        return $this->gameSuggests;
+    }
+
+    public function addGameSuggest(GameSuggest $gameSuggest): self
+    {
+        if (!$this->gameSuggests->contains($gameSuggest)) {
+            $this->gameSuggests[] = $gameSuggest;
+            $gameSuggest->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGameSuggest(GameSuggest $gameSuggest): self
+    {
+        if ($this->gameSuggests->contains($gameSuggest)) {
+            $this->gameSuggests->removeElement($gameSuggest);
+            // set the owning side to null (unless already changed)
+            if ($gameSuggest->getAuthor() === $this) {
+                $gameSuggest->setAuthor(null);
             }
         }
 

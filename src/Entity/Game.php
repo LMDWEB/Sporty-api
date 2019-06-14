@@ -90,9 +90,15 @@ class Game
      */
     private $round;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\GameSuggest", mappedBy="game")
+     */
+    private $gameSuggests;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->gameSuggests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -247,6 +253,37 @@ class Game
     public function setRound(?int $round): self
     {
         $this->round = $round;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|GameSuggest[]
+     */
+    public function getGameSuggests(): Collection
+    {
+        return $this->gameSuggests;
+    }
+
+    public function addGameSuggest(GameSuggest $gameSuggest): self
+    {
+        if (!$this->gameSuggests->contains($gameSuggest)) {
+            $this->gameSuggests[] = $gameSuggest;
+            $gameSuggest->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGameSuggest(GameSuggest $gameSuggest): self
+    {
+        if ($this->gameSuggests->contains($gameSuggest)) {
+            $this->gameSuggests->removeElement($gameSuggest);
+            // set the owning side to null (unless already changed)
+            if ($gameSuggest->getGame() === $this) {
+                $gameSuggest->setGame(null);
+            }
+        }
 
         return $this;
     }
