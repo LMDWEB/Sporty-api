@@ -3,9 +3,16 @@
 {% block title %}| Confirm{% endblock %}
 
 {% block body %}
+    {% block header %}
+        {{ include('header.html.twig')}}
+    {% endblock %}
 
-<div class="container">
-    <h1>Confirm</h1>
-    {{ dump(payment) }}
-</div>
+        <div class="container">
+            <h1>Confirm</h1>
+            {{ dump(payment) }}
+        </div>
+
+    {% block footer %}
+        {{ include('footer.html.twig')}}
+    {% endblock %}
 {% endblock %}

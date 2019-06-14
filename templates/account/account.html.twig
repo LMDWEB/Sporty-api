@@ -1,16 +1,23 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}| Mon compte{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>{{ app.user.username }}</h1>
-        <div class="list-group">
-        <h3>Liste des rôles : </h3>
-        {% for role in app.user.roles %}
-            <button type="button" class="list-group-item list-group-item-action">{{ role }}</button>
-        {% endfor %}
+    {% block header %}
+        {{ include('header.html.twig')}}
+    {% endblock %}
+        <div class="container">
+            <h1>{{ app.user.username }}</h1>
+            <div class="list-group">
+            <h3>Liste des rôles : </h3>
+            {% for role in app.user.roles %}
+                <button type="button" class="list-group-item list-group-item-action">{{ role }}</button>
+            {% endfor %}
+            </div>
         </div>
-    </div>
-
+    {% block footer %}
+        {{ include('footer.html.twig')}}
+    {% endblock %}
 {% endblock %}
+
