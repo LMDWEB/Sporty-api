@@ -28,6 +28,14 @@ class UserFixtures extends Fixture
         $freeRole->setTitle("ROLE_API");
         $manager->persist($freeRole);
 
+        $proRole = new Role();
+        $proRole->setTitle("ROLE_API_PRO");
+        $manager->persist($proRole);
+
+        $companyRole = new Role();
+        $companyRole->setTitle("ROLE_API_COMPANY");
+        $manager->persist($companyRole);
+
         /*
         * USER
         */

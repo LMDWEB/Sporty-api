@@ -30,6 +30,7 @@ class PriceController extends AbstractController
                 'price' => 0,
                 'name' => 'Free',
                 'requests' => 100,
+                'role' => 'ROLE_API',
                 'description' => '100 requêtes',
             ],
 
@@ -37,14 +38,16 @@ class PriceController extends AbstractController
                 'price' => 15,
                 'name' => 'Pro',
                 'requests' => 1000,
+                'role' => 'ROLE_API_PRO',
                 'description' => '1000 requêtes',
             ],
 
             3 => [
-                'price' => 29,
+                'price' => 35,
                 'name' => 'Entreprise',
-                'requests' => 1000,
-                'description' => '10000 requêtes',
+                'requests' => 100000,
+                'role' => 'ROLE_API_COMPANY',
+                'description' => '100000 requêtes',
             ],
         ];
     /**
@@ -193,7 +196,7 @@ class PriceController extends AbstractController
 
         // Add Role to User and nb request
 
-        $role = $repository->findOneBy(array('title' => 'ROLE_API'));
+        $role = $repository->findOneBy(array('title' => $this->forfaits[$id]['role']));
         $user = $this->getUser();
         $user->addUserRole($role);
 
@@ -202,7 +205,7 @@ class PriceController extends AbstractController
         $manager->persist($user);
         $manager->flush();
 
-        $this->addFlash('success' , 'Vous etes maintenant souscrit au forfait : ' . $this->forfaits[$id]['name']);
+        $this->addFlash('success' , 'Merci pour votre confiance ! Vous etes maintenant souscrit au forfait : ' . $this->forfaits[$id]['name']);
 
         return $this->render('price/index.html.twig');
     }

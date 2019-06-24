@@ -11,7 +11,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
- * @ApiResource(normalizationContext={"groups"={"comment"}})
+ * @ApiResource(
+ *     normalizationContext={"groups"={"comment"}},
+ *     attributes={"access_control"="is_granted('ROLE_USER')"},
+ *     collectionOperations={
+ *         "get",
+ *         "post"={"access_control"="is_granted('ROLE_USER')"}
+ *     },
+ *     itemOperations={
+ *         "get"={"access_control"="is_granted('ROLE_USER') and object.owner == user"},
+ *         "put"={"access_control"="is_granted('ROLE_USER') and previous_object.owner == user"},
+ *         "delete"={"access_control"="is_granted('ROLE_ADMIN')"},
+ *     }
+ * )
  * @ApiFilter(OrderFilter::class)
  */
 class Comment
@@ -38,7 +50,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="comments")
-     * @Groups({"game", "comment"})
+     * @Groups({"comment"})
      */
     private $game;
 
