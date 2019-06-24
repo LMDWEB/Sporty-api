@@ -41,6 +41,7 @@ class UserFixtures extends Fixture
         */
         $user = new User();
         $user->setUsername("admin");
+        $user->setEmail("admin@admin.fr");
         $user->setPassword($this->encoder->encodePassword($user, "password"));
         $user->addUserRole($adminRole);
         $user->setNbRequests(0);
@@ -49,6 +50,7 @@ class UserFixtures extends Fixture
 
         $user2 = new User();
         $user2->setUsername("random");
+        $user2->setEmail("random@random.fr");
         $user2->setPassword($this->encoder->encodePassword($user, "password"));
         $user2->setNbRequests(0);
         $user2->setNbRequestMax(100);

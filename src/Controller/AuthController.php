@@ -17,9 +17,11 @@ class AuthController extends AbstractController
 
         $username = $request->request->get('_username');
         $password = $request->request->get('_password');
+        $email = $request->request->get('_email');
 
         $user = new User();
         $user->setUsername($username);
+        $user->setEmail($email);
         $user->setPassword($encoder->encodePassword($user, $password));
         $user->setNbRequests(0);
         $user->setNbRequestMax(100);

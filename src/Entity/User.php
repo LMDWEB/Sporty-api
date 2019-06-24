@@ -71,6 +71,11 @@ class User implements UserInterface
      */
     private $gameSuggests;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -235,6 +240,18 @@ class User implements UserInterface
                 $gameSuggest->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }
