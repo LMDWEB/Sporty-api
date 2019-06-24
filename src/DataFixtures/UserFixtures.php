@@ -36,7 +36,7 @@ class UserFixtures extends Fixture
         $user->setPassword($this->encoder->encodePassword($user, "password"));
         $user->addUserRole($adminRole);
         $user->setNbRequests(0);
-        $user->setNbRequestMax(999);
+        $user->setNbRequestMax(99999);
         $manager->persist($user);
 
         $user2 = new User();

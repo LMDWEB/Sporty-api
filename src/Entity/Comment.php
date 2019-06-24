@@ -11,7 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
- * @ApiResource()
+ * @ApiResource(normalizationContext={"groups"={"comment"}})
  * @ApiFilter(OrderFilter::class)
  */
 class Comment
@@ -20,30 +20,31 @@ class Comment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("game")
+     * @Groups({"game", "comment"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups("game")
+     * @Groups({"game", "comment"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups("game")
+     * @Groups({"game", "comment"})
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="comments")
+     * @Groups({"game", "comment"})
      */
     private $game;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
-     * @Groups("game")
+     * @Groups({"game", "comment"})
      */
     private $creator;
 
