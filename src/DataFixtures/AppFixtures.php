@@ -57,6 +57,12 @@ class AppFixtures extends Fixture
                 $leagueData = new League();
                 $seasonStart = \DateTime::createFromFormat('Y-m-d', $league->season_start);
                 $seasonEnd = \DateTime::createFromFormat('Y-m-d', $league->season_end);
+
+                if ($league->name == "Ligue 1"){
+                    $league->logo = "https://upload.wikimedia.org/wikipedia/fr/thumb/9/9b/Logo_de_la_Ligue_1_%282008%29.svg/658px-Logo_de_la_Ligue_1_%282008%29.svg.png";
+                }
+
+
                 $leagueData->setName($league->name)
                     ->setCountry($league->country)
                     ->setCountryCode($league->country_code)
