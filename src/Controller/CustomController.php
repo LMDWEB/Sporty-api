@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Game;
+use App\Repository\GameRepository;
 use App\Repository\GameSuggestRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -192,18 +193,32 @@ class CustomController extends AbstractController
      * @param GameSuggestRepository $gameSuggestRepository
      * @return Response
      */
-    public function scoreSuggest($id, GameSuggestRepository $gameSuggestRepository)
+    public function scoreSuggest($id, GameSuggestRepository $gameSuggestRepository, GameRepository $gameRepository)
     {
         $response = new Response();
-       // $game = $gameSuggestRepository->find($id);
-       // dd($game);
+
+        $game = $gameRepository->find($id);
+
+        $games = $gameSuggestRepository->findByGame($game->getId());
+
+        $result = array();
+        foreach ($games as $g){
+            $result[$g->getAuthor()->getId()] = $g->getScoreHomeTeam().'-'.$g->getScoreAwayTeam();
+        }
+
+        $counts = array_count_values($result);
+        arsort($counts);
+        $top_with_count = array_slice($counts, 0, 1, true);
+
+        $score = explode('-', key($top_with_count));
+
         $response->setContent(json_encode(array(
             'id' => $id,
             'game' => '/api/games/'.$id,
-            'accuracy' => 85.6,
-            'scoreHomeTeam' => 2,
-            'scoreAwayTeam' => 1,
-            'contributors' => 12
+            'accuracy' => current($top_with_count) / count($result) * 100,
+            'scoreHomeTeam' => $score[0],
+            'scoreAwayTeam' => $score[1],
+            'contributors' => count($result)
 
         )));
         $response->headers->set('Content-Type', 'application/json');
