@@ -13,13 +13,13 @@
                             <div style="height: 1px;" role="main" aria-expanded="false" class="navbar-collapse collapse navbar-collapse-centered" id="bs">
                                 <ul class="nav navbar-nav navbar-nav-centered">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ path('home') }}">Accueil</a>
+                                        <a class="nav-link" href="{{ path('home') }}">{% trans into locale %}Accueil{% endtrans %}</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ path('price') }}">{% trans into locale %}Offres{% endtrans %}</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ path('swagger_ui') }}">API Documentation</a>
+                                        <a class="nav-link" href="{{ path('swagger_ui') }}">{% trans into locale %}API Documentation{% endtrans %}</a>
                                     </li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right other-navbar">
@@ -29,16 +29,16 @@
                                         <a class="nav-link" href="{{ path('my_account') }}">{{ app.user.username }}</a>
                                     </li>
                                     <li class="nav-item register-display">
-                                        <a class="nav-link" href="{{ path('account_logout') }}">Déconnecter</a>
+                                        <a class="nav-link" href="{{ path('account_logout') }}">{% trans into locale %}Déconnecter{% endtrans %}</a>
                                     </li>
                                 </div>                    
                                 {% else %}
                                 <div class="login-div">
                                         <li class="nav-item login-display">
-                                            <a class="nav-link" href="{{ path('account_login') }}">Se connecter</a>
+                                            <a class="nav-link" href="{{ path('account_login') }}">{% trans into locale %}Se connecter{% endtrans %}</a>
                                         </li>
                                         <li class="nav-item register-display">
-                                            <a class="nav-link" href="{{ path('account_register') }}">Inscription</a>
+                                            <a class="nav-link" href="{{ path('account_register') }}">{% trans into locale %}Inscription{% endtrans %}</a>
                                         </li>
                                     </div>
                                 {% endif %}
