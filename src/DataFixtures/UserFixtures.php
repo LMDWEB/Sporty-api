@@ -56,6 +56,22 @@ class UserFixtures extends Fixture
         $user2->setNbRequestMax(100);
         $manager->persist($user2);
 
+        $user3 = new User();
+        $user3->setUsername("toto");
+        $user3->setEmail("toto@toto.fr");
+        $user3->setPassword($this->encoder->encodePassword($user, "toto"));
+        $user3->setNbRequests(0);
+        $user3->setNbRequestMax(100);
+        $manager->persist($user3);
+
+        $user4 = new User();
+        $user4->setUsername("tata");
+        $user4->setEmail("tata@tata.fr");
+        $user4->setPassword($this->encoder->encodePassword($user, "tata"));
+        $user4->setNbRequests(0);
+        $user4->setNbRequestMax(100);
+        $manager->persist($user4);
+
         $manager->flush();
     }
 }

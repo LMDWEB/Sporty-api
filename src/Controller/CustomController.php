@@ -201,26 +201,40 @@ class CustomController extends AbstractController
 
         $games = $gameSuggestRepository->findByGame($game->getId());
 
-        $result = array();
-        foreach ($games as $g){
-            $result[$g->getAuthor()->getId()] = $g->getScoreHomeTeam().'-'.$g->getScoreAwayTeam();
+        if(count($games) > 0){
+            $result = array();
+            foreach ($games as $g){
+                $result[$g->getAuthor()->getId()] = $g->getScoreHomeTeam().'-'.$g->getScoreAwayTeam();
+            }
+
+            $counts = array_count_values($result);
+            arsort($counts);
+            $top_with_count = array_slice($counts, 0, 1, true);
+
+            $score = explode('-', key($top_with_count));
+
+            $response->setContent(json_encode(array(
+                'id' => $id,
+                'game' => '/api/games/'.$id,
+                'accuracy' => current($top_with_count) / count($result) * 100,
+                'scoreHomeTeam' => $score[0],
+                'scoreAwayTeam' => $score[1],
+                'contributors' => count($result)
+
+            )));
+        } else {
+            $response->setContent(json_encode(array(
+                'id' => $id,
+                'game' => '/api/games/'.$id,
+                'accuracy' => 0,
+                'scoreHomeTeam' => null,
+                'scoreAwayTeam' => null,
+                'contributors' => 0
+
+            )));
         }
 
-        $counts = array_count_values($result);
-        arsort($counts);
-        $top_with_count = array_slice($counts, 0, 1, true);
 
-        $score = explode('-', key($top_with_count));
-
-        $response->setContent(json_encode(array(
-            'id' => $id,
-            'game' => '/api/games/'.$id,
-            'accuracy' => current($top_with_count) / count($result) * 100,
-            'scoreHomeTeam' => $score[0],
-            'scoreAwayTeam' => $score[1],
-            'contributors' => count($result)
-
-        )));
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
