@@ -29,6 +29,9 @@
 
 <body>
 
+{% if locale is not defined %}
+    {% set locale = 'fr' %}
+{% endif %}
 
 {% for label,messages in app.flashes %}
 
