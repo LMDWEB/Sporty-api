@@ -18,6 +18,7 @@ use PayPal\Exception\PayPalConnectionException;
 use PayPal\Rest\ApiContext;
 use PhpParser\Node\Expr\Cast\Object_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -53,9 +54,9 @@ class PriceController extends AbstractController
     /**
      * @Route("/price", name="price")
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->render('price/index.html.twig');
+        return $this->render('price/index.html.twig', ['locale' => $request->getLocale()]);
     }
 
     /**

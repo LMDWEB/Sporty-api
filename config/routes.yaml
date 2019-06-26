@@ -14,3 +14,21 @@ login_check:
 swagger_ui:
     path: /docs
     controller: api_platform.swagger.action.ui
+
+price:
+    path:       /{_locale}/price
+    controller: App\Controller\PriceController::index
+    requirements:
+        _locale: en|fr
+
+home:
+    path:       /
+    controller: App\Controller\HomeController::index
+    requirements:
+        _locale: en|fr
+
+home_translate:
+    path:       /{_locale}
+    controller: App\Controller\HomeController::index
+    requirements:
+        _locale: en|fr

@@ -20,51 +20,51 @@
                 {% endfor %}
             {% endfor %}
             <div id="offres">
-                <h1>Offres</h1>
-                <p class="lead">Achat disponible Uniquement via Paypal</p>
+                <h1>{% trans into locale  %}Offres{% endtrans %}</h1>
+                <p class="lead">{% trans into locale  %}Achat disponible Uniquement via Paypal{% endtrans %}</p>
 
                 <table class="table table-snipped">
                     <thead>
                         <tr>
                             <th></th>
-                            <th class="text-center">Gratuit</th>
-                            <th class="text-center">Pro pour 15€/mois</th>
-                            <th class="text-center">Entreprise pour 35€/mois</th>
+                            <th class="text-center">{% trans into locale  %}Gratuit{% endtrans %}</th>
+                            <th class="text-center">{% trans into locale  %}Pro pour 15€/mois{% endtrans %}</th>
+                            <th class="text-center">{% trans into locale  %}Entreprise pour 35€/mois{% endtrans %}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Nombre de requêtes</td>
-                            <td class="text-center"><strong>100 requêtes</strong></td>
-                            <td class="text-center"><strong>1000 requêtes</strong></td>
-                            <td class="text-center"><strong>Illimités </strong></td>
+                            <td>{% trans into locale  %}Nombre de requêtes{% endtrans %}</td>
+                            <td class="text-center"><strong>100 {% trans into locale  %}requêtes{% endtrans %}</strong></td>
+                            <td class="text-center"><strong>1000 {% trans into locale  %}requêtes{% endtrans %}</strong></td>
+                            <td class="text-center"><strong>{% trans into locale  %}Illimités{% endtrans %} </strong></td>
                         </tr>
                         <tr>
-                            <td>Ligues</td>
-                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Equipes</td>
+                            <td>{% trans into locale  %}Ligues{% endtrans %}</td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                         </tr>
                         <tr>
-                            <td>Joueurs</td>
+                            <td>{% trans into locale  %}Equipes{% endtrans %}</td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                         </tr>
                         <tr>
-                            <td>Matchs</td>
+                            <td>{% trans into locale  %}Joueurs{% endtrans %}</td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                         </tr>
                         <tr>
-                            <td>Score en direct</td>
+                            <td>{% trans into locale  %}Matchs{% endtrans %}</td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                            <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>{% trans into locale  %}Score en direct{% endtrans %}</td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
                             <td class="text-center text-success"><i class="fas fa-2x fa-check"></i></td>
@@ -74,19 +74,19 @@
                             <td class="text-center">
                                 <a href="{{ path('payment' , {'id' : 1}) }}" class="button-psg">
                                     <i class="fas fa-check"></i>
-                                    Souscrire
+                                    {% trans into locale  %}Souscrire{% endtrans %}
                                 </a>
                             </td>
                             <td class="text-center">
                                 <a href="{{ path('payment', {'id' : 2}) }}" class="button-psg">
                                     <i class="fas fa-check"></i>
-                                    Souscrire
+                                    {% trans into locale  %}Souscrire{% endtrans %}
                                 </a>
                             </td>
                             <td class="text-center">
                                 <a href="{{ path('payment' , {'id' : 3}) }}" class="button-psg">
                                     <i class="fas fa-check"></i>
-                                    Souscrire
+                                    {% trans into locale  %}Souscrire{% endtrans %}
                                 </a>
                             </td>
                         </tr>
