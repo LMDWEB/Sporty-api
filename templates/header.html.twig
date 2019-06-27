@@ -1,6 +1,6 @@
 <div id="header-holder">
     <section class="page-header clear-filter section-hero section-shaped my-0" filter-color="orange" >
-       <div class="page-header-image" data-parallax="true" style="background-image:url('img/theme/header.jpg');">
+       <div class="page-header-image" data-parallax="true">
        </div>
         <nav id="nav" class="navbar navbar-full">
             <div class="container-fluid">
@@ -19,7 +19,14 @@
                                         <a class="nav-link" href="{{ path('price') }}">{% trans into locale %}Offres{% endtrans %}</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ path('swagger_ui') }}">{% trans into locale %}API Documentation{% endtrans %}</a>
+                                        <a class="nav-link" href="{{ path('swagger_ui') }}">API Documentation</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" id="dropdown09" data-toggle="dropdown"><span class="caret"> </span> Langue</a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdown09">
+                                            <a class="dropdown-item" href="http://127.0.0.1:8000/"><span class="flag-icon flag-icon-fr"> </span>  Fr</a><br/>
+                                            <a class="dropdown-item" href="http://127.0.0.1:8000/en"><span class="flag-icon flag-icon-us"> </span> En</a
+                                        </div>
                                     </li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right other-navbar">
@@ -59,9 +66,10 @@
                                 <div id="banner-title" class="col-sm-7">
                                     <div id="taille">Sporty</div>
                                     <div class="b-text">
-                                        <br>une API fait pour vous !</div>
-                                    <div class="m-text">Commencer par voir <span class="bold">nos offres</span></div>
-                                    <a href="{{ path('price') }}" class="hbtn hbtn-primary hbtn-lg">Offres</a>
+                                        <br> {% trans into locale %}Une API{% endtrans %} {% trans into locale %}fait pour vous{% endtrans %}!
+                                    </div>
+                                    <div class="m-text">{% trans into locale %}Commencer par voir{% endtrans %} <span class="bold">{% trans into locale %}nos offres{% endtrans %}</span></div>
+                                    <a href="{{ path('price') }}" class="hbtn hbtn-primary hbtn-lg">{% trans into locale %}Offres{% endtrans %}</a>
                                 </div>
                             </div>
                         </div>
