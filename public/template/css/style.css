@@ -875,9 +875,6 @@ body.fullpage {
     background-image: none;
 }
 
-#header-holder.innerpage.clouds-bg:before {
-    background-image: url("../images/cloud-bg-df.png");
-}
 
 #header-holder.innerpage.lighter {
     background-color: #152c53;
@@ -921,10 +918,6 @@ body.fullpage {
     background-color: #EDF4FF;
 }
 
-#header-holder.light-header .cloud-bg {
-    background-image: url("../images/cloud-bg2.svg");
-    opacity: 1;
-}
 
 .navbar-brand {
     padding: 0px 15px;
@@ -3610,6 +3603,7 @@ nav.navbar .nav .open > a:hover, nav.navbar .nav .open > a:focus {
 
     nav.navbar .navbar-collapse {
         text-align: center;
+        padding-left: 190px;
     }
 
     nav.navbar .navbar-nav {
