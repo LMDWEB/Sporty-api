@@ -51,6 +51,7 @@ $(window).on('load',function(){
         }
         $('html,body').animate({scrollTop:elPos}, 500);
     });*/
+    //modif
 
     // About page "about.html"
     // Fix image resize issue.
