@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Request;
 
 class AccountController extends AbstractController
 {
@@ -13,7 +14,7 @@ class AccountController extends AbstractController
      * @param AuthenticationUtils $utils
      * @return Response
      */
-    public function login(AuthenticationUtils $utils)
+    public function login(AuthenticationUtils $utils, Request $request)
     {
         $error = $utils->getLastAuthenticationError();
         $username = $utils->getLastUsername();
@@ -21,6 +22,7 @@ class AccountController extends AbstractController
         return $this->render('account/login.html.twig', [
             'hasError' => $error !== null,
             'username' => $username,
+            'locale' => $request->getLocale()
         ]);
     }
 

@@ -2,25 +2,25 @@
     <a class="btn-go-top" href="#"><i class="hstb hstb-down-arrow"></i></a>
     <div class="container">
         <div class="row">
-            <div class="col-xs-6 col-sm-2 col-md-3 col-lg-4">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <div class="footer-menu">
-                    <h4>Ressources</h4>
+                    <h4>{% trans into locale %}Ressources{% endtrans %}</h4>
                     <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="{{ path('swagger_ui') }}">API Documentation</a></li>
+                        <li><a class="text-muted" href="{{ path('swagger_ui') }}">{% trans into locale %}API Documentation{% endtrans %}</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-2 col-md-3 col-lg-4">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <div class="footer-menu">
-                    <h4>A propos</h4>
+                    <h4>{% trans into locale %}A propos{% endtrans %}</h4>
                     <ul class="list-unstyled text-small">
                         <li><a class="text-muted" href="https://github.com/LMDWEB/Sporty-api">Team <i class="fab fa-github"></i></a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-4">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <div class="footer-menu custom-footer-menu">
-                    <h4>Contactez-Nous</h4>
+                    <h4>{% trans into locale %}Contactez-Nous{% endtrans %}</h4>
                     <ul class="social">
                         <li><a href="https://twitter.com/lmdpsg"><i class="fab fa-twitter"></i></a></li>
                     </ul>
@@ -32,12 +32,12 @@
                 <div class="col-md-6">
                     <div class="sub-footer-menu">
                         <ul>
-                            <li><a href="privacy.html">Politique de confidentialité</a></li>
+                            <li><a href="privacy.html">{% trans into locale %}Politique de confidentialité{% endtrans %}</a></li>
                         </ul>        
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="copyright">© Copyright 2019 Sporty, Tous les droits sont réservés</div>
+                    <div class="copyright">© Copyright2019 Sporty, {% trans into locale %}Tous les droits sont réservés{% endtrans %} </div>
                 </div>
             </div>
         </div>
