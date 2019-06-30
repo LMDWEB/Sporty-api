@@ -13,6 +13,9 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
+                                <button type="button" data-toggle="collapse" data-target="0.767199221924802" aria-controls="0.767199221924802" aria-label="Toggle navigation" class="navbar-toggler">
+                                <span class="navbar-toggler-icon"></span></button>
+                                
                                 <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('img/logo3.png') }}" alt="Sporty"></a>
                             </div>
                             <div style="height: 1px;" role="main" aria-expanded="false" class="navbar-collapse collapse navbar-collapse-centered" id="bs">
@@ -26,13 +29,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ path('swagger_ui') }}">API Documentation</a>
                                     </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" id="dropdown09" data-toggle="dropdown"><span class="caret"> </span> Langue</a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdown09">
-                                            <a class="dropdown-item" href="http://127.0.0.1:8000/"><span class="flag-icon flag-icon-fr"> </span>  Fr</a><br/>
-                                            <a class="dropdown-item" href="http://127.0.0.1:8000/en"><span class="flag-icon flag-icon-us"> </span> En</a
-                                        </div>
-                                    </li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right other-navbar">
                                 {% if app.user %}
@@ -43,6 +39,10 @@
                                     <li class="nav-item register-display">
                                         <a class="nav-link" href="{{ path('account_logout') }}">{% trans into locale %}Déconnecter{% endtrans %}</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="http://127.0.0.1:8000/en" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> En</a>
+                                        <a class="nav-link" href="http://127.0.0.1:8000/" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-fr"> </span> Fr</a>
+                                    </li>
                                 </div>                    
                                 {% else %}
                                 <div class="login-div">
@@ -51,6 +51,10 @@
                                         </li>
                                         <li class="nav-item register-display">
                                             <a class="nav-link" href="{{ path('account_register') }}">{% trans into locale %}Inscription{% endtrans %}</a>
+                                        </li>
+                                         <li class="nav-item">
+                                            <a class="nav-link" href="http://127.0.0.1:8000/en" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> En</a>
+                                            <a class="nav-link" href="http://127.0.0.1:8000/" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-fr"> </span> Fr</a>
                                         </li>
                                     </div>
                                 {% endif %}

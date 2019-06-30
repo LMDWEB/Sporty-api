@@ -21,6 +21,12 @@ price:
     requirements:
         _locale: en|fr
 
+account_login:
+    path:       /{_locale}/user/login
+    controller: App\Controller\AccountController::login
+    requirements:
+        _locale: en|fr
+
 home:
     path:       /
     controller: App\Controller\HomeController::index
