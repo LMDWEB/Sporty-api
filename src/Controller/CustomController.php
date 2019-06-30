@@ -240,4 +240,48 @@ class CustomController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route("/api/lastsuggestbygame/{iduser}/{idgame}")
+     * @param $iduser
+     * @param $idgame
+     */
+    public function lastScoreSuggestByUser($iduser, $idgame, GameSuggestRepository $gameSuggestRepository){
+        $games = $gameSuggestRepository->findByGame($idgame);
+
+        $response = new Response();
+
+        if(count($games) > 0){
+
+            $result = "";
+
+            foreach ($games as $g){
+                if ($g->getAuthor()->getId() == $iduser){
+                    $result = array(
+                        "id" => $g->getId(),
+                        "game" => "/api/games/".$idgame,
+                        "author"=> "/api/users/".$g->getAuthor()->getUsername(),
+                        "scoreHomeTeam"=> $g->getScoreHomeTeam(),
+                        "scoreAwayTeam" => $g->getScoreAwayTeam(),
+                        "createdAt" => $g->getCreatedAt(),
+                        "isValid" => 0
+                    );
+                }
+            }
+
+            if ($result == ""){
+                $result = array('result' => null);
+            }
+
+
+            $response->setContent(json_encode($result));
+        } else {
+            $response->setContent(json_encode(array(
+                'result' => null
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
 }

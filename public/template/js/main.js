@@ -43,14 +43,14 @@ $(window).on('load',function(){
     });
 
     // Add scroll animation for hash links
-    $('a[href*=\\#]').on('click', function(event){
+    /*$('a[href*=\\#]').on('click', function(event){
         event.preventDefault();
         var elPos = 0;
         if($(this).attr('href')!='#'){
             elPos = $(this.hash).offset().top;
         }
         $('html,body').animate({scrollTop:elPos}, 500);
-    });
+    });*/
 
     // About page "about.html"
     // Fix image resize issue.
