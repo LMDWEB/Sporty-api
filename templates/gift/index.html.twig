@@ -10,7 +10,12 @@
     <div id="cadeaux" class="container">
         <h1 class="text-center">Liste des cadeaux disponibles</h1>
         {% if(app.user) %}
-            <h3 class="text-center">Votre solde ({{ app.user.points }} points)</h3>
+            {% if app.user.points == null %}
+                <h3 class="text-center">Votre solde (0 points)</h3>
+            {% else %}
+                <h3 class="text-center">Votre solde ({{ app.user.points }} points)</h3>
+            {% endif %}
+
         {% else %}
             <h3 class="text-center"><a href="{{ path('account_login') }}#login">Connectez</a> vous pour connaitre votre solde</h3>
         {% endif %}
