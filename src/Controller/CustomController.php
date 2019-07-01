@@ -80,13 +80,8 @@ class CustomController extends AbstractController
     {
         $response = new Response();
 
-        $games = $this->getDoctrine()->getRepository(Game::class)
-            ->findFiveLastGames();
+        $games = $this->getDoctrine()->getRepository(Game::class)->findBy(array('status' => 'in progress'), null, 5);
 
-
-        //dd($games);
-        //$response->setContent($games);
-        //test
 
         $tab = array();
 
@@ -132,8 +127,7 @@ class CustomController extends AbstractController
     {
         $response = new Response();
 
-        $games = $this->getDoctrine()->getRepository(Game::class)
-            ->findFiveNextGames();
+        $games = $this->getDoctrine()->getRepository(Game::class)->findBy(array('status' => 'coming'), null, 5);
 
        // dd($games);
 
@@ -143,6 +137,7 @@ class CustomController extends AbstractController
         $tab = array();
 
         foreach ($games as $game){
+            if ($game->getScore() == "0-0") $score = null; else $score = $game->getScore();
             $tab[] = array(
                 'id' => $game->getId(),
                 'status' => $game->getStatus(),
@@ -160,7 +155,7 @@ class CustomController extends AbstractController
                     'id' => $game->getLeague()->getId(),
                     'name' => $game->getLeague()->getName()
                 ),
-                'score' => $game->getScore(),
+                'score' => $score,
                 'goalsAwayTeam' => $game->getGoalsAwayTeam(),
                 'goalsHomeTeam' => $game->getGoalsHomeTeam(),
                 'eventStart' => $game->getEventStart(),

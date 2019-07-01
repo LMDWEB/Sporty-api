@@ -199,13 +199,79 @@ class AppFixtures extends Fixture
             ->setStatus("coming")
             ->setEventStart(strtotime('2019-08-10'))
             ->setEventBegin('2019-08-10')
-            ->setAwayTeam($teams[85])
-            ->setHomeTeam($teams[92])
+            ->setAwayTeam($teams[92])
+            ->setHomeTeam($teams[85])
             ->setGoalsAwayTeam(null)
             ->setGoalsHomeTeam(null)
             ->setRound(39)
             ->setScore('0-0');
 
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setLeague($leagues[4])
+            ->setStatus("coming")
+            ->setEventStart(strtotime('2019-08-10'))
+            ->setEventBegin('2019-08-10')
+            ->setAwayTeam($teams[80])
+            ->setHomeTeam($teams[91])
+            ->setGoalsAwayTeam(null)
+            ->setGoalsHomeTeam(null)
+            ->setRound(39)
+            ->setScore('0-0');
+
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setLeague($leagues[4])
+            ->setStatus("coming")
+            ->setEventStart(strtotime('2019-08-10'))
+            ->setEventBegin('2019-08-10')
+            ->setAwayTeam($teams[93])
+            ->setHomeTeam($teams[81])
+            ->setGoalsAwayTeam(null)
+            ->setGoalsHomeTeam(null)
+            ->setRound(39)
+            ->setScore('0-0');
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setLeague($leagues[4])
+            ->setStatus("coming")
+            ->setEventStart(strtotime('2019-08-10'))
+            ->setEventBegin('2019-08-10')
+            ->setAwayTeam($teams[83])
+            ->setHomeTeam($teams[93])
+            ->setGoalsAwayTeam(null)
+            ->setGoalsHomeTeam(null)
+            ->setRound(39)
+            ->setScore('0-0');
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setLeague($leagues[4])
+            ->setStatus("coming")
+            ->setEventStart(strtotime('2019-08-10'))
+            ->setEventBegin('2019-08-10')
+            ->setAwayTeam($teams[94])
+            ->setHomeTeam($teams[82])
+            ->setGoalsAwayTeam(null)
+            ->setGoalsHomeTeam(null)
+            ->setRound(39)
+            ->setScore('0-0');
+        $manager->persist($game);
+
+        $game = new Game();
+        $game->setLeague($leagues[4])
+            ->setStatus("in progress")
+            ->setEventStart(strtotime('2019-08-10'))
+            ->setEventBegin('2019-08-10')
+            ->setAwayTeam($teams[80])
+            ->setHomeTeam($teams[85])
+            ->setGoalsAwayTeam(null)
+            ->setGoalsHomeTeam(null)
+            ->setRound(39)
+            ->setScore('0-0');
         $manager->persist($game);
 
         $manager->flush();
