@@ -10,6 +10,7 @@ use App\Entity\Team;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\Tests\Compiler\G;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
@@ -192,6 +193,20 @@ class AppFixtures extends Fixture
 
             $manager->persist($game);
         }
+
+        $game = new Game();
+        $game->setLeague($leagues[4])
+            ->setStatus("coming")
+            ->setEventStart(strtotime('2019-08-10'))
+            ->setEventBegin('2019-08-10')
+            ->setAwayTeam($teams[85])
+            ->setHomeTeam($teams[92])
+            ->setGoalsAwayTeam(null)
+            ->setGoalsHomeTeam(null)
+            ->setRound(39)
+            ->setScore('0-0');
+
+        $manager->persist($game);
 
         $manager->flush();
     }

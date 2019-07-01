@@ -168,6 +168,46 @@ class CustomController extends AbstractController
     }
 
     /**
+     * @Route("/api/next_game", name="next_game")
+     */
+    public function nextgame()
+    {
+        $response = new Response();
+
+        $game = $this->getDoctrine()->getRepository(Game::class)->findOneBy([], array('id' => 'DESC'), 1, 1);
+        
+            $tab[] = array(
+                'id' => $game->getId(),
+                'status' => $game->getStatus(),
+                'homeTeam' => array(
+                    'id' => $game->getHomeTeam()->getId(),
+                    'name' => $game->getHomeTeam()->getName(),
+                    'logo' => $game->getHomeTeam()->getLogo()
+                ),
+                'awayTeam' => array(
+                    'id' => $game->getAwayTeam()->getId(),
+                    'name' => $game->getAwayTeam()->getName(),
+                    'logo' => $game->getAwayTeam()->getLogo()
+                ),
+                'league' => array(
+                    'id' => $game->getLeague()->getId(),
+                    'name' => $game->getLeague()->getName()
+                ),
+                'score' => $game->getScore(),
+                'goalsAwayTeam' => $game->getGoalsAwayTeam(),
+                'goalsHomeTeam' => $game->getGoalsHomeTeam(),
+                'eventStart' => $game->getEventStart(),
+                'round' => $game->getRound()
+            );
+
+
+        $response->setContent(json_encode($tab));
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /**
      * @Route("/api/me", name="me")
      */
     public function me(TokenStorageInterface $storage)
