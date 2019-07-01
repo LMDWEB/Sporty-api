@@ -10,9 +10,9 @@
     <div id="cadeaux" class="container">
         <h1 class="text-center">Liste des cadeaux disponibles</h1>
         {% if(app.user) %}
-            <h3 class="text-center">Votre solde (0 points)</h3>
+            <h3 class="text-center">Votre solde ({{ app.user.points }} points)</h3>
         {% else %}
-            <h3 class="text-center"><a href="{{ path('account_login') }}">Connectez</a> vous pour connaitre votre solde</h3>
+            <h3 class="text-center"><a href="{{ path('account_login') }}#login">Connectez</a> vous pour connaitre votre solde</h3>
         {% endif %}
         <div class="container">
             <div class="col-md-12">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="panel-body">
                             <img width="90%" src="{{ asset('img/shop-product1.jpg') }}" alt="">
-                            Disponible pour 50 points
+                            Disponible pour 500 points
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="panel-body">
                             <img width="90%" src="{{ asset('img/shop-product2.jpg') }}" alt="">
-                            Disponible pour 100 points
+                            Disponible pour 1000 points
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="panel-body">
                             <img width="90%" src="{{ asset('img/shop-product3.jpg') }}" alt="">
-                            Disponible pour 90 points
+                            Disponible pour 900 points
                         </div>
                     </div>
                 </div>
