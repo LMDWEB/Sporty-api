@@ -27,21 +27,24 @@
                                         <a class="nav-link" href="{{ path('price') }}#offres">{% trans into locale %}Offres{% endtrans %}</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ path('swagger_ui') }}">API Documentation</a>
+                                        <a class="nav-link" target="_blank" href="{{ path('swagger_ui') }}">API</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" target="_blank" href="{{ path('gift') }}#cadeaux">Cadeaux</a>
                                     </li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right other-navbar">
                                 {% if app.user %}
                                 <div class="login-div">
                                     <li class="nav-item login-display">
-                                        <a class="nav-link" href="{{ path('my_account') }}">{{ app.user.username }}</a>
+                                        <a class="nav-link" href="{{ path('my_account') }}#account">{% trans into locale %}Mon compte{% endtrans %}</a>
                                     </li>
                                     <li class="nav-item register-display">
                                         <a class="nav-link" href="{{ path('account_logout') }}">{% trans into locale %}Déconnecter{% endtrans %}</a>
                                     </li>
                                     <li class="nav-item register-display login-display" style="margin-left: 20px;">
-                                        <a class="nav-link" href="{{ path('home') }}en" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> En</a>
-                                        <a class="nav-link" style="margin-left: 10px;" href="{{ path('home') }}" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-fr"> </span> Fr</a>
+                                        <a class="nav-link" href="{{ path('home') }}en" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span></a>
+                                        <a class="nav-link" style="margin-left: 10px;" href="{{ path('home') }}" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-fr"> </span></a>
                                     </li>
                                 </div>                    
                                 {% else %}
@@ -75,7 +78,7 @@
                                 <div id="banner-title" class="col-sm-7">
                                     <div id="taille">Sporty</div>
                                     <div class="b-text">
-                                        <br> {% trans into locale %}Une API{% endtrans %} {% trans into locale %}fait pour vous{% endtrans %}!
+                                        <br> {% trans into locale %}Une API{% endtrans %} {% trans into locale %}foot pour vous{% endtrans %}!
                                     </div>
                                     <div class="m-text">{% trans into locale %}Commencer par voir{% endtrans %} <span class="bold">{% trans into locale %}nos offres{% endtrans %}</span></div>
                                     <a href="{{ path('home') }}#offres" class="hbtn hbtn-primary hbtn-lg">{% trans into locale %}Offres{% endtrans %}</a>
@@ -87,4 +90,16 @@
             </div>
         </div>
     </section>
+</div>
+
+<div class="container">
+    {% for label,messages in app.flashes %}
+
+        <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message | raw}}</p>
+            {% endfor %}
+        </div>
+
+    {% endfor %}
 </div>
