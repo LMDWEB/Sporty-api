@@ -70,7 +70,10 @@
         }
     },
     "require-dev": {
+        "hautelook/alice-bundle": "^2.5",
+        "symfony/phpunit-bridge": "^4.3",
         "symfony/profiler-pack": "^1.0",
+        "symfony/test-pack": "^1.0",
         "symfony/web-server-bundle": "4.2.*"
     }
 }
