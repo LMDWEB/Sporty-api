@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Repository\GameRepository;
 use App\Repository\GameSuggestRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,15 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class CustomController extends AbstractController
 {
+    private $tokenStorage;
+    private $manager;
+
+    public function __construct(ManagerRegistry $manager, TokenStorageInterface $storage)
+    {
+        $this->manager = $manager->getManager();
+        $this->tokenStorage = $storage;
+    }
+
     /**
      * @Route("/api/last_games", name="last_games")
      */
@@ -175,7 +185,7 @@ class CustomController extends AbstractController
         $response = new Response();
 
         $game = $this->getDoctrine()->getRepository(Game::class)->findOneBy([], array('id' => 'DESC'), 1, 1);
-        
+
             $tab[] = array(
                 'id' => $game->getId(),
                 'status' => $game->getStatus(),
@@ -281,11 +291,15 @@ class CustomController extends AbstractController
     }
 
     /**
-     * @Route("/api/lastsuggestbygame/{iduser}/{idgame}")
-     * @param $iduser
+     * @Route("/api/lastsuggestbygame/{idgame}")
      * @param $idgame
      */
-    public function lastScoreSuggestByUser($iduser, $idgame, GameSuggestRepository $gameSuggestRepository){
+    public function lastScoreSuggestByUser($idgame, GameSuggestRepository $gameSuggestRepository){
+
+        $token = $this->tokenStorage->getToken();
+        $user = $token->getUser();
+
+
         $games = $gameSuggestRepository->findByGame($idgame);
 
         $response = new Response();
@@ -295,7 +309,7 @@ class CustomController extends AbstractController
             $result = "";
 
             foreach ($games as $g){
-                if ($g->getAuthor()->getId() == $iduser){
+                if ($g->getAuthor()->getId() == $user->getId()){
                     $result = array(
                         "id" => $g->getId(),
                         "game" => "/api/games/".$idgame,
@@ -309,14 +323,28 @@ class CustomController extends AbstractController
             }
 
             if ($result == ""){
-                $result = array('result' => null);
+                $result = array(
+                    "id" => null,
+                    "game" => "/api/games/".$idgame,
+                    "author"=> "/api/users/".$user->getUsername(),
+                    "scoreHomeTeam"=> null,
+                    "scoreAwayTeam" => null,
+                    "createdAt" => null,
+                    "isValid" => 0
+                );
             }
 
 
             $response->setContent(json_encode($result));
         } else {
             $response->setContent(json_encode(array(
-                'result' => null
+                "id" => null,
+                "game" => "/api/games/".$idgame,
+                "author"=> "/api/users/".$user->getUsername(),
+                "scoreHomeTeam"=> null,
+                "scoreAwayTeam" => null,
+                "createdAt" => null,
+                "isValid" => 0
             )));
         }
 
