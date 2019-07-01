@@ -53,6 +53,7 @@ security:
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/account, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/docs, roles: ROLE_USER }
         - { path: ^/payment/, roles: ROLE_USER }
         - { path: ^/pay/, roles: ROLE_USER }

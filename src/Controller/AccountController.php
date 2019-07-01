@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 class AccountController extends AbstractController
 {
     /**
-     * @Route("/user/login", name="account_login")
+     * @Route("/login", name="account_login")
      * @param AuthenticationUtils $utils
      * @return Response
      */

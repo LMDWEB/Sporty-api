@@ -25,7 +25,7 @@
     <script src="{{ asset('template/js/jquery.min.js') }}"></script>
     <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('template/js/slick.min.js') }}"></script>
-    <script src="{{ asset('template/js/main.js') }}"></script>
+    <script src="{{ asset('template/js/main.js') }}?{{ random(10, 50) }}" ></script>
 
 
 </head>
@@ -35,18 +35,6 @@
 {% if locale is not defined %}
     {% set locale = 'fr' %}
 {% endif %}
-
-{% for label,messages in app.flashes %}
-
-    <div class="container">
-        <div class="alert alert-{{ label }}">
-            {% for message in messages %}
-                <p>{{ message | raw}}</p>
-            {% endfor %}
-        </div>
-    </div>
-
-{% endfor %}
 
 {% block body %}{% endblock %}
 

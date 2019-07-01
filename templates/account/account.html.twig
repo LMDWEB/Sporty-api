@@ -7,13 +7,93 @@
     {% block header %}
         {{ include('header.html.twig')}}
     {% endblock %}
-        <div class="container">
-            <h1>{{ app.user.username }}</h1>
+        <div id="account" class="container">
+            <div class="alert alert-warning" role="alert">This page is only available in french for the moment</div>
+            <h2>Votre nom d'utilisateur est <strong>{{ app.user.username }}</strong></h2>
             <div class="list-group">
-            <h3>Vous possédez les rôles suivants : </h3>
+            <h2>Actuellement vous êtes souscris au(x) forfait(s) : </h2>
             {% for role in app.user.roles %}
-                <button type="button" class="list-group-item list-group-item-action">{{ role }}</button>
+                {% if role == "ROLE_API_PRO" %}
+                    <button type="button" class="list-group-item list-group-item-action">Forfait Pro</button>
+                {% endif %}
+
+                {% if role == "ROLE_API" %}
+                    <button type="button" class="list-group-item list-group-item-action">Forfait Gratuit</button>
+                {% endif %}
+
+                {% if role == "ROLE_API_COMPANY" %}
+                    <button type="button" class="list-group-item list-group-item-action">Forfait Entreprise</button>
+                {% endif %}
+
             {% endfor %}
+            </div>
+
+            <div>
+                <h2>Statistiques</h2>
+                <p>Nombre d'appel(s) effectués => {{ app.user.nbrequests }}</p>
+                <p>Nombre d'appel(s) maximum => {{ app.user.nbrequestmax }}</p>
+                <p>Nombre d'appel(s) restants => {{ app.user.nbrequestmax - app.user.nbrequests }}</p>
+            </div>
+
+            <div>
+                <h2>Comment récupérer votre Token ?</h2>
+                <p>Cette API fonctionne avec un token JWT. Vous trouverez plus de renseignement sur <a target="_blank" href="https://jwt.io/">https://jwt.io/</a> <br>
+                    Vous pouvez faire un appel curl à l'URL suivante pour récupérer votre token: </p>
+                <kbd>
+                    curl --request POST \
+                    --url https://api.lmdfoot.com/login_check \
+                    --header 'content-type: application/json' \
+                    --data '{"username":"username","password":"password"}'
+                </kbd>
+            </div>
+
+            <div>
+                <h2>Que faire après le token récupérer ?</h2>
+                <p>Vous pouvez par exemple récupérer la liste des championnats : </p>
+                <kbd>
+                    curl --request GET \
+                    --url 'https://api.lmdfoot.com/api/leagues' \
+                    --header 'accept: application/json' \
+                    --header 'authorization: Bearer VOTRE_TOKEN'
+                </kbd>
+            </div>
+
+            <div>
+                <h2>Exemple de retour de l'api (au format JSON)</h2>
+                <code><pre>
+                [
+                   {
+                        "id": 1,
+                        "name": "Premier League",
+                        "country": "England",
+                        "countryCode": "GB",
+                        "season": 2018,
+                        "seasonStart": "2018-08-10T23:21:38+02:00",
+                        "seasonEnd": "2019-05-12T23:21:38+02:00",
+                        "logo": "https://www.api-football.com//public//leagues//2.png",
+                        "flag": "https://www.api-football.com//public//flags//gb.svg",
+                        "isCurrent": 1,
+                    }
+                 ]
+                    </pre>
+
+                </code>
+            </div>
+
+            <div>
+                <h2>Où avoir les informations sur toutes les routes (endpoints) ?</h2>
+                <p><a href="{{ path('swagger_ui') }}" target="_blank">Toutes les informations</a></p>
+            </div>
+
+            <div>
+                {% if app.user.points == null %}
+                    <h2>Actuellement vous avez 0 points</h2>
+                {% else %}
+                    <h2>Actuellement vous avez {{ app.user.points }} points</h2>
+                {% endif %}
+
+                <p>Vous pouvez gagner des points en commentant les matchs et en partageant le score des matchs en live sur notre application mobile</p>
+                <br><br>
             </div>
         </div>
     {% block footer %}

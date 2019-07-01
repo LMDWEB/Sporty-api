@@ -1,5 +1,6 @@
 Une API : Une API
 fait pour vous :  fait pour vous
+foot pour vous: foot pour vous
 Commencer par voir : Commencer par voir 
 nos offres: nos offres
 Offres: Offres
@@ -18,6 +19,7 @@ Joueurs: Joueurs
 Matchs: Matchs
 Score en direct: Score en direct
 requêtes: requêtes
+Cadeaux: Cadeaux
 
 Achat: Achat
 disponible: disponible
@@ -45,3 +47,6 @@ Accueil: Accueil
 Connecter:  Connecter
 Mot de passe: Mot de passe
 Utilisateur: Utilisateur
+
+Mon compte: Mon compte
+Deconnecter: Deconnecter

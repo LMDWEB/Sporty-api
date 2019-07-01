@@ -5,6 +5,7 @@ namespace App\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\GameSuggest;
 use App\Entity\User;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
@@ -18,9 +19,11 @@ final class AddOwnerToSuggestGame implements EventSubscriberInterface
      * @var TokenStorageInterface
      */
     private $tokenStorage;
+    private $manager;
 
-    public function __construct(TokenStorageInterface $tokenStorage)
+    public function __construct(ManagerRegistry $manager, TokenStorageInterface $tokenStorage)
     {
+        $this->manager = $manager->getManager();
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -53,6 +56,14 @@ final class AddOwnerToSuggestGame implements EventSubscriberInterface
 
         $article->setAuthor($owner);
         $article->setCreatedAt(new \DateTime());
+
+        $user = $token->getUser();
+
+        $points = $user->getPoints();
+        if($points == null) $points = 0;
+        $user->setPoints($points + 5);
+        $this->manager->persist($user);
+        $this->manager->flush();
 
     }
 

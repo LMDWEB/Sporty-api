@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Repository\GameRepository;
 use App\Repository\GameSuggestRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,15 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class CustomController extends AbstractController
 {
+    private $tokenStorage;
+    private $manager;
+
+    public function __construct(ManagerRegistry $manager, TokenStorageInterface $storage)
+    {
+        $this->manager = $manager->getManager();
+        $this->tokenStorage = $storage;
+    }
+
     /**
      * @Route("/api/last_games", name="last_games")
      */
@@ -70,13 +80,8 @@ class CustomController extends AbstractController
     {
         $response = new Response();
 
-        $games = $this->getDoctrine()->getRepository(Game::class)
-            ->findFiveLastGames();
+        $games = $this->getDoctrine()->getRepository(Game::class)->findBy(array('status' => 'in progress'), null, 5);
 
-
-        //dd($games);
-        //$response->setContent($games);
-        //test
 
         $tab = array();
 
@@ -122,8 +127,7 @@ class CustomController extends AbstractController
     {
         $response = new Response();
 
-        $games = $this->getDoctrine()->getRepository(Game::class)
-            ->findFiveNextGames();
+        $games = $this->getDoctrine()->getRepository(Game::class)->findBy(array('status' => 'coming'), null, 5);
 
        // dd($games);
 
@@ -133,6 +137,50 @@ class CustomController extends AbstractController
         $tab = array();
 
         foreach ($games as $game){
+            if ($game->getScore() == "0-0") $score = null; else $score = $game->getScore();
+            $tab[] = array(
+                'id' => $game->getId(),
+                'status' => $game->getStatus(),
+                'homeTeam' => array(
+                    'id' => $game->getHomeTeam()->getId(),
+                    'name' => $game->getHomeTeam()->getName(),
+                    'logo' => $game->getHomeTeam()->getLogo()
+                ),
+                'awayTeam' => array(
+                    'id' => $game->getAwayTeam()->getId(),
+                    'name' => $game->getAwayTeam()->getName(),
+                    'logo' => $game->getAwayTeam()->getLogo()
+                ),
+                'league' => array(
+                    'id' => $game->getLeague()->getId(),
+                    'name' => $game->getLeague()->getName()
+                ),
+                'score' => $score,
+                'goalsAwayTeam' => $game->getGoalsAwayTeam(),
+                'goalsHomeTeam' => $game->getGoalsHomeTeam(),
+                'eventStart' => $game->getEventStart(),
+                'round' => $game->getRound()
+            );
+        }
+
+        //dd($tab);
+        //die();
+
+        $response->setContent(json_encode($tab));
+
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /**
+     * @Route("/api/next_game", name="next_game")
+     */
+    public function nextgame()
+    {
+        $response = new Response();
+
+        $game = $this->getDoctrine()->getRepository(Game::class)->findOneBy([], array('id' => 'DESC'), 1, 1);
+
             $tab[] = array(
                 'id' => $game->getId(),
                 'status' => $game->getStatus(),
@@ -156,10 +204,7 @@ class CustomController extends AbstractController
                 'eventStart' => $game->getEventStart(),
                 'round' => $game->getRound()
             );
-        }
 
-        //dd($tab);
-        //die();
 
         $response->setContent(json_encode($tab));
 
@@ -180,7 +225,8 @@ class CustomController extends AbstractController
 
         $response->setContent(json_encode([
             'id' => $id,
-            'name' => $name
+            'name' => $name,
+            'points' => $user->getPoints()
         ]));
         $response->headers->set('Content-Type', 'application/json');
 
@@ -240,4 +286,66 @@ class CustomController extends AbstractController
         return $response;
     }
 
+    /**
+     * @Route("/api/lastsuggestbygame/{idgame}")
+     * @param $idgame
+     */
+    public function lastScoreSuggestByUser($idgame, GameSuggestRepository $gameSuggestRepository){
+
+        $token = $this->tokenStorage->getToken();
+        $user = $token->getUser();
+
+
+        $games = $gameSuggestRepository->findByGame($idgame);
+
+        $response = new Response();
+
+        if(count($games) > 0){
+
+            $result = "";
+
+            foreach ($games as $g){
+                if ($g->getAuthor()->getId() == $user->getId()){
+                    $result = array(
+                        "id" => $g->getId(),
+                        "game" => "/api/games/".$idgame,
+                        "author"=> "/api/users/".$g->getAuthor()->getUsername(),
+                        "scoreHomeTeam"=> $g->getScoreHomeTeam(),
+                        "scoreAwayTeam" => $g->getScoreAwayTeam(),
+                        "createdAt" => $g->getCreatedAt(),
+                        "isValid" => 0
+                    );
+                }
+            }
+
+            if ($result == ""){
+                $result = array(
+                    "id" => null,
+                    "game" => "/api/games/".$idgame,
+                    "author"=> "/api/users/".$user->getUsername(),
+                    "scoreHomeTeam"=> null,
+                    "scoreAwayTeam" => null,
+                    "createdAt" => null,
+                    "isValid" => 0
+                );
+            }
+
+
+            $response->setContent(json_encode($result));
+        } else {
+            $response->setContent(json_encode(array(
+                "id" => null,
+                "game" => "/api/games/".$idgame,
+                "author"=> "/api/users/".$user->getUsername(),
+                "scoreHomeTeam"=> null,
+                "scoreAwayTeam" => null,
+                "createdAt" => null,
+                "isValid" => 0
+            )));
+        }
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
 }

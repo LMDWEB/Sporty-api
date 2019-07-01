@@ -7,7 +7,7 @@
         {{ include('header.html.twig')}}
     {% endblock %}
 
-        <div class="pricing container-fluid">
+        <div id="offres" class="pricing container-fluid">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12">
@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="pricing-button">
-                                <a href="{{ path('price') }}">{% trans into locale  %}Inscrivez-vous{% endtrans %}</a>
+                                <a href="{{ path('price') }}#offres">{% trans into locale  %}Inscrivez-vous{% endtrans %}</a>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="pricing-button">
-                                <a href="{{ path('price') }}">{% trans into locale  %}Souscrire{% endtrans %}</a>
+                                <a href="{{ path('price') }}#offres">{% trans into locale  %}Souscrire{% endtrans %}</a>
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="pricing-button">
-                                <a href="{{ path('price') }}">{% trans into locale  %}Souscrire{% endtrans %}</a>
+                                <a href="{{ path('price') }}#offres">{% trans into locale  %}Souscrire{% endtrans %}</a>
                             </div>
                         </div>
                     </div>

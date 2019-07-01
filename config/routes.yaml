@@ -22,7 +22,7 @@ price:
         _locale: en|fr
 
 account_login:
-    path:       /{_locale}/user/login
+    path:       /{_locale}/login
     controller: App\Controller\AccountController::login
     requirements:
         _locale: en|fr
