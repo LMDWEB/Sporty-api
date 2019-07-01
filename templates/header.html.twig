@@ -39,9 +39,9 @@
                                     <li class="nav-item register-display">
                                         <a class="nav-link" href="{{ path('account_logout') }}">{% trans into locale %}Déconnecter{% endtrans %}</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="http://127.0.0.1:8000/en" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> En</a>
-                                        <a class="nav-link" href="http://127.0.0.1:8000/" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-fr"> </span> Fr</a>
+                                    <li class="nav-item register-display login-display" style="margin-left: 20px;">
+                                        <a class="nav-link" href="{{ path('home') }}en" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> En</a>
+                                        <a class="nav-link" style="margin-left: 10px;" href="{{ path('home') }}" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-fr"> </span> Fr</a>
                                     </li>
                                 </div>                    
                                 {% else %}
@@ -52,9 +52,9 @@
                                         <li class="nav-item register-display">
                                             <a class="nav-link" href="{{ path('account_register') }}">{% trans into locale %}Inscription{% endtrans %}</a>
                                         </li>
-                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ path('home') }}en" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> En</a>
-                                            <a class="nav-link" href="{{ path('home') }}" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-fr"> </span> Fr</a>
+                                         <li class="nav-item register-display login-display" style="margin-left: 20px;">
+                                            <a class="nav-link" href="{{ path('home') }}en" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span></a>
+                                            <a class="nav-link" style="margin-left: 10px;" href="{{ path('home') }}" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-fr"> </span></a>
                                         </li>
                                     </div>
                                 {% endif %}
@@ -78,7 +78,7 @@
                                         <br> {% trans into locale %}Une API{% endtrans %} {% trans into locale %}fait pour vous{% endtrans %}!
                                     </div>
                                     <div class="m-text">{% trans into locale %}Commencer par voir{% endtrans %} <span class="bold">{% trans into locale %}nos offres{% endtrans %}</span></div>
-                                    <a href="{{ path('price') }}" class="hbtn hbtn-primary hbtn-lg">{% trans into locale %}Offres{% endtrans %}</a>
+                                    <a href="{{ path('home') }}#offres" class="hbtn hbtn-primary hbtn-lg">{% trans into locale %}Offres{% endtrans %}</a>
                                 </div>
                             </div>
                         </div>
