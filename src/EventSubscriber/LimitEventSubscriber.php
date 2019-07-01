@@ -1,4 +1,5 @@
 <?php
+
 namespace App\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use Doctrine\Common\Persistence\ManagerRegistry;

@@ -81,6 +81,11 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $points;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -257,6 +262,18 @@ class User implements UserInterface
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(?int $points): self
+    {
+        $this->points = $points;
 
         return $this;
     }

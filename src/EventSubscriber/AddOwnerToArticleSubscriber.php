@@ -6,6 +6,7 @@ namespace App\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\Comment;
 use App\Entity\User;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
@@ -19,10 +20,12 @@ final class AddOwnerToArticleSubscriber implements EventSubscriberInterface
      * @var TokenStorageInterface
      */
     private $tokenStorage;
+    private $manager;
 
-    public function __construct(TokenStorageInterface $tokenStorage)
+    public function __construct(ManagerRegistry $manager, TokenStorageInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
+        $this->manager = $manager->getManager();
     }
 
     public static function getSubscribedEvents()
@@ -65,7 +68,13 @@ final class AddOwnerToArticleSubscriber implements EventSubscriberInterface
 
         $article->setCreatedAt(new \DateTime());
 
+        $user = $token->getUser();
 
+        $points = $user->getPoints();
+        if($points == null) $points = 0;
+        $user->setPoints($points + 1);
+        $this->manager->persist($user);
+        $this->manager->flush();
 
     }
 }

@@ -225,7 +225,8 @@ class CustomController extends AbstractController
 
         $response->setContent(json_encode([
             'id' => $id,
-            'name' => $name
+            'name' => $name,
+            'points' => $user->getPoints()
         ]));
         $response->headers->set('Content-Type', 'application/json');
 
