@@ -6,16 +6,17 @@
     {% block header %}
         {{ include('header.html.twig')}}
     {% endblock %}
-    <div class="container">
+    <div id="login-section" class="container-fluid">
         {% if app.user %}
             connecté
         {% endif %}
-        <div class="row">
-            <div id="login">
-                <div class="col-md-3">&nbsp;</div>
-                <div class="col-md-6">
+        
+        {# <img src="{{ asset('img/blurred.jpg') }}" alt="fond_login"> #}
+        <div id="login" class="row">
+                
+                <div class="col-md-4 col-md-offset-4 center-login">
                     <div class="bg-dark py-3 px-3">
-                        <h1 class="p-15">{% trans into locale  %}Connecter{% endtrans %}</h1>
+                        <h1 class="p-15 center-block">{% trans into locale  %}Connectez-vous{% endtrans %}</h1>
 
                         {% if hasError %}
                             <div class="alert alert-danger">Une erreur est survenue, le nom d'utilisateur ou le mot de passe est invalide</div>
@@ -38,8 +39,6 @@
             </div>  
         </div>
 
-
-    </div>
     {% block footer %}
         {{ include('footer.html.twig')}}
     {% endblock %}
