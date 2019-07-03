@@ -50,21 +50,60 @@
     margin-bottom: 60px;
 }
 
+#login-section{
+    background-image: linear-gradient(to left bottom, #ffffff, #eae8f9, #d2d3f3, #b7beee, #99abe9, #829cdd, #6a8dd0, #4f7ec4, #3e6eae, #2c5f99, #195084, #004170);
+}
+
+#login-section::before{
+
+background-repeat: no-repeat;
+background-size: cover;
+content: ''; 
+position: absolute;
+top: 2px; 
+bottom: 0;
+left: 0;
+right: 0;
+opacity: 0.2;
+
+}
+
 #login {
     min-height: 450px;
-    margin-top: 60px;
     margin-bottom: 60px;
+    margin-top: -20px;
+    padding-top: 70px;
+
 }
 
 .bg-dark {
-    background-image: linear-gradient(to left bottom, #ffffff, #eae8f9, #d2d3f3, #b7beee, #99abe9, #829cdd, #6a8dd0, #4f7ec4, #3e6eae, #2c5f99, #195084, #004170);
+    
     padding: 50px;
     border-radius: 10px;
     box-shadow: 10px 10px 18px -6px rgba(0,0,0,0.53);
+    background: white;
+}
+
+input#username {
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid #104b7d;
+    border-radius: 0;
+}
+
+input#password {
+    border: none;
+    box-shadow: none;
+    border-bottom: 2px solid #104b7d;
+    border-radius: 0;
 }
 
 .p-15 {
     padding-bottom: 15px;
+}
+
+.center-section{
+    padding-left: 85px;
 }
 
 
@@ -1295,6 +1334,46 @@ nav.navbar .nav .open > a:hover, nav.navbar .nav .open > a:focus {
 .light-header nav.navbar .navbar-nav.other-navbar > li .btn-chat:hover, .light-header nav.navbar .navbar-nav.other-navbar > li .btn-chat:focus {
     background-color: #1c67d7;
 }
+
+
+
+@media (max-width: 768px){
+    nav.navbar .navbar-collapse {
+        margin-top: 26px;
+        text-align: center;
+        padding-left: 186px;
+        background: white;
+        margin-right: -23px;
+        text-align: right;
+        /* padding-right: 79px; */
+        overflow-x: hidden;
+        border-radius: 10px;
+    }
+
+    nav.navbar .navbar-nav > li > a:hover {
+        padding-bottom: 10px;
+        background-color: transparent;
+        border-bottom: 2px solid red;
+        border-radius: 10px 10px 0px 6px;
+        cursor: pointer;
+    }
+
+    .login-div {
+        float: right;
+        min-width: 230px;
+        height: 46px;
+        display: inline-block;
+        padding-top: 27px;
+        margin-right: 16px;
+        margin-bottom: 29px;
+    }
+
+    li.nav-item.register-display.login-display {
+        float: right;
+    }
+}
+
+
 
 /* ----------------------------------
     3 - Top Content Styles
